@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-//
+//Branch Manager PAGE
 public class BranchManagerController {
 
     @FXML
