@@ -132,6 +132,26 @@ public class mysqlConnection {
 
 	}
 	
+//	//Create Account 
+//	public static String CreateAccount(String ID, String Lname) {
+//		try {
+//	           Statement stmt = con.createStatement();
+//	           ResultSet res = stmt.executeQuery("SELECT * FROM project.users;");
+////check if user already exist
+//	           while(res.next()) {
+//	              if(res.getString(1).equals(ID) && res.getString(2).equals(Lname)) {
+//	            	  return res.getString(7);
+//	              }
+//	           }
+//
+//	           res.close();
+//	        } catch (SQLException var5) {
+//	           var5.printStackTrace();
+//	        }
+//		return "error";
+//
+//	}
+//	
 	
 }
 

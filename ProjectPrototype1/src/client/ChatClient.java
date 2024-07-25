@@ -32,6 +32,7 @@ public class ChatClient extends AbstractClient
   public static ArrayList<Order> list;
   public static boolean awaitResponse = false;
   public static String logIn = "error";
+  public static String CreateAccount = "error1";
 
   
 
