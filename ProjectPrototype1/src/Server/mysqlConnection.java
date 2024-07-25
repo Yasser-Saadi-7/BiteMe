@@ -42,9 +42,9 @@ public class mysqlConnection {
 		            }}
 			 return false;
 		
-	}	
-
-    
+	}
+	
+	
     public Order parseTheData(Object msg) {
     	String message,orderNum,res,price,listNum,address;
         message=(String)msg;
@@ -113,6 +113,8 @@ public class mysqlConnection {
 
         return list;
      }
+    
+    
 	public static String userLogIn(String username, String password) {
 		try {
 	           Statement stmt = con.createStatement();
@@ -132,6 +134,34 @@ public class mysqlConnection {
 
 	}
 	
+	
+//To help assign a branch to each manager
+
+    public static Connection getConnection() {
+        return con;
+    }
+
+    public static class BranchService {
+        public List<String> getBranchesForManager(int managerId) {
+            List<String> branches = new ArrayList<>();
+            String query = "SELECT b.name FROM branches b " +
+                           "JOIN users u ON b.id = u.branch_id " +
+                           "WHERE u.id = ? AND u.user_type = 'manager'";
+
+            try (PreparedStatement stmt = mysqlConnection.getConnection().prepareStatement(query)) {
+                stmt.setInt(1, managerId);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    branches.add(rs.getString("name"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return branches;
+        }
+    
+}
 //	//Create Account 
 //	public static String CreateAccount(String ID, String Lname) {
 //		try {

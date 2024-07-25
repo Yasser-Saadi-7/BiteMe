@@ -12,6 +12,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
+import java.util.List;
+
+import Server.mysqlConnection;
 
 public class ViewMonthlyReport {
 
@@ -33,38 +36,58 @@ public class ViewMonthlyReport {
     @FXML
     private Button btnclose;
 
+    private int currentManagerId; // ID of the logged-in manager
+
     @FXML
     private void initialize() {
-        // Initialize ComboBox items here, if needed
-        chooseBrcombo.getItems().addAll("Branch 1", "Branch 2", "Branch 3");
         // Initialize months
         btnchooseMcombo.getItems().addAll(
             "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December");
+
+        // Load branches for the current manager if the ID is valid
+        if (currentManagerId > 0) {
+            mysqlConnection.BranchService branchService = new mysqlConnection.BranchService();
+            List<String> branches = branchService.getBranchesForManager(currentManagerId);
+            chooseBrcombo.getItems().addAll(branches);
+        } else {
+            // Handle case where no manager ID is set
+            chooseBrcombo.getItems().add("No branches available");
+        }
+    }
+
+    public void setCurrentManagerId(int managerId) {
+        this.currentManagerId = managerId;
     }
 
     // Method to handle the "View Performance Report" button click
     @FXML
     private void handleViewPerformanceReportButton(ActionEvent event) {
-        // Implement your logic to view the performance report
-        System.out.println("View Performance Report");
-        ViewPerformanceReport();
+        if (isInputValid()) {
+            // Implement your logic to view the performance report
+            System.out.println("View Performance Report");
+            ViewPerformanceReport();
+        }
     }
 
     // Method to handle the "View Income Report" button click
     @FXML
     private void handleViewIncomeReportButton(ActionEvent event) {
-        // Implement your logic to view the income report
-        System.out.println("View Income Report");
-        ViewIncomeReport();
+        if (isInputValid()) {
+            // Implement your logic to view the income report
+            System.out.println("View Income Report");
+            ViewIncomeReport();
+        }
     }
 
     // Method to handle the "View Order Report" button click
     @FXML
     private void handleViewOrderReportButton(ActionEvent event) {
-        // Implement your logic to view the order report
-        System.out.println("View Order Report");
-        ViewOrderReport();
+        if (isInputValid()) {
+            // Implement your logic to view the order report
+            System.out.println("View Order Report");
+            ViewOrderReport();
+        }
     }
 
     // Method to handle the "Close" button click
@@ -95,6 +118,7 @@ public class ViewMonthlyReport {
         // Example: Load a new FXML file for the order report
         System.out.println("Order Report Logic");
     }
+
     // Method to check if both ComboBoxes have a selected item
     private boolean isInputValid() {
         if (chooseBrcombo.getValue() == null || btnchooseMcombo.getValue() == null) {
@@ -113,4 +137,3 @@ public class ViewMonthlyReport {
         alert.showAndWait();
     }
 }
-
