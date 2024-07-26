@@ -24,6 +24,8 @@ public class BranchManagerController {
     @FXML
     private Button btnclose;
 
+    
+    
     // Method to handle Create Order button click
     @FXML
     private void handleCreateOrderButton(ActionEvent event) {

@@ -44,22 +44,22 @@ public class CreateAccountController {
         String id = IDtxt.getText();
         String email = Emailtxt.getText();
         String creditCard = Credittxt.getText();
-        ArrayList<String> arr = new ArrayList<>();
-    	String result;
+        ArrayList<String> arr1 = new ArrayList<>();
+    	String newAcc;
     	if(firstName.trim().isEmpty() || lastName.trim().isEmpty()
     			|| phone.trim().isEmpty() || id.trim().isEmpty()
     			|| email.trim().isEmpty() || creditCard.trim().isEmpty()) {
-    			updateTextMessage("Please fill ALL Fields"));
+    			updateTextMessage("Please fill ALL Fields");
     		}else {
-    			arr.add("CreateAccount");
-    			arr.add(firstName);
-    			arr.add(lastName);
-    			arr.add(phone);
-    			arr.add(id);
-    			arr.add(email);
-    			arr.add(creditCard);
-    			ClientUI.chat.accept(arr);
-    			result=ChatClient.createAccount;
+    			arr1.add("CreateAccount");
+    			arr1.add(firstName);
+    			arr1.add(lastName);
+    			arr1.add(phone);
+    			arr1.add(id);
+    			arr1.add(email);
+    			arr1.add(creditCard);
+    			ClientUI.chat.accept(arr1);
+    			newAcc=ChatClient.CreateAccount;
     		}
 
 }
