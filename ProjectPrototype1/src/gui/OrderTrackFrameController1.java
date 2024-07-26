@@ -18,6 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logic.Message1;
+import logic.MessageType;
 import logic.Order;
 import java.io.IOException;
 
@@ -47,7 +49,7 @@ public class OrderTrackFrameController1 {
 			System.out.println("You must enter an order number");
 			updateTextMessage("You must enter an order number");
 		} else {
-			ClientUI.chat.accept(num);
+			ClientUI.chat.accept(new Message1(MessageType.searchOrder,num));
 			if (ChatClient.o1.getOrederNumber().equals("Error")) {
 				System.out.println("Order Number Not Found");
 				updateTextMessage("Order Number Not Found");

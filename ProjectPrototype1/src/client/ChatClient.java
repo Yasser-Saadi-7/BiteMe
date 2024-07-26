@@ -3,6 +3,7 @@ package client;
 import ocsf.client.*;
 import client.*;
 import common.ChatIF;
+import logic.Message1;
 import logic.Order;
 
 import java.io.*;
@@ -62,24 +63,31 @@ public class ChatClient extends AbstractClient
    */
   public void handleMessageFromServer(Object msg) 
   {
-	  Order order;
 	  System.out.println("--> handleMessageFromServer");
-     
 	  awaitResponse = false;
-	  if(msg instanceof Order) {
-		  order=(Order)msg;
-		  o1.setListNumber(order.getListNumber());
-		  o1.setOrderAddress(order.getOrderAddress());
-		  o1.setOrederNumber(order.getOrederNumber());
-		  o1.setRestaurant(order.getRestaurant());
-		  o1.setTprice(order.getTprice());
-	  }else if(msg instanceof ArrayList) {
-		  list=(ArrayList)msg;
-	  }
-	  else {
-		  String st;
-		  st=msg.toString();
-		  o1.setOrederNumber("Error");
+	  Message1 m = (Message1) msg;
+	  
+	  switch (m.getMessageType()) {
+	  case searchOrder:
+		  Order order = (Order)m.getObject();
+		  if(order!=null) {
+			  o1.setListNumber(order.getListNumber());
+			  o1.setOrderAddress(order.getOrderAddress());
+			  o1.setOrederNumber(order.getOrederNumber());
+			  o1.setRestaurant(order.getRestaurant());
+			  o1.setTprice(order.getTprice());
+		  }else {
+			  o1.setOrederNumber("Error");
+		  }
+		  break;
+	  case viewOrdersList:
+		  list=(ArrayList<Order>)m.getObject();
+		  break;
+	  case logIn:
+		  logIn=(String)m.getObject();
+		  break;
+	  default:
+		  break;
 	  }
 	 
   }

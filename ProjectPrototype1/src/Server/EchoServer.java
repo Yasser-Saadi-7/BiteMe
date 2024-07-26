@@ -10,6 +10,9 @@ import java.util.Vector;
 import client.ChatClient;
 import client.ClientController;
 import gui.ServerPortFrameController1;
+import logic.ClientConnectionDetails;
+import logic.Message1;
+import logic.MessageType;
 import logic.Order;
 import ocsf.server.*;
 
@@ -61,35 +64,48 @@ public class EchoServer extends AbstractServer
    */
   public void handleMessageFromClient  (Object msg, ConnectionToClient client)
   {
-	  Order orderFromDb;
-	  Order orderToDb;
-	  if(msg instanceof Order) {
-		  orderToDb=(Order)msg;
-		  Sqlconnection.updateOrderToDB(orderToDb);
-		  this.sendToAllClients("Order Updated!");
-		  
-	  }else if(((String)msg).equals("view")) {
-		  ArrayList<Order> orders = mysqlConnection.getOrdersFromDB();
-	      this.sendToAllClients(orders);
-	  }else if(msg instanceof ArrayList) {
-		  ArrayList<String> arr ;
-		  arr=(ArrayList)msg;
-		  if(arr.get(0).equals("LogIn")) {
-			  ChatClient.logIn=Sqlconnection.userLogIn(arr.get(1), arr.get(2));
-		  }
-	  }
-	  else{
-		  int flag=0;
-		  System.out.println("Message received: " + msg + " from " + client);
-		  orderFromDb=Sqlconnection.parseTheData(msg);
-		  if(orderFromDb!=null) {
-			  System.out.println("Order found!");
-			  this.sendToAllClients(orderFromDb);
-		  }else {
-			  System.out.println("Not Found");
-			  this.sendToAllClients("Error");
-		  }
-	  }
+	  Message1 m = (Message1) msg;
+		String message[];
+		ArrayList<Object> arr;
+		try {
+			switch (m.getMessageType()) {
+			case searchOrder:
+				message = ((String) m.getObject()).split(" ");
+				Order orderFromDb=Sqlconnection.parseTheData(message[0]);
+				client.sendToClient(new Message1(MessageType.searchOrder,orderFromDb));
+				break;
+			case connect:
+				message = ((String) m.getObject()).split(" ");
+				ServerPortFrameController1.connectionData.add(new ClientConnectionDetails(message[0], message[1], message[2]));
+				client.sendToClient(new Message1(null, null));
+				break;
+			case disconnect:
+				message = ((String) m.getObject()).split(" ");
+				ServerPortFrameController1.connectionData.add(new ClientConnectionDetails(message[0], message[1], message[2]));
+				client.sendToClient(new Message1(null, null));
+			case viewOrdersList:
+				ArrayList<Order> orders = mysqlConnection.getOrdersFromDB();
+				client.sendToClient(new Message1(MessageType.viewOrdersList,orders));
+				break;
+			case updateOrder:
+				Order orderToDb=(Order)m.getObject();
+				Sqlconnection.updateOrderToDB(orderToDb);
+				client.sendToClient(new Message1(null, null));
+				break;
+			case logIn:
+				message = ((String) m.getObject()).split(" ");
+				String userType =Sqlconnection.userLogIn(message[0],message[1]);
+				client.sendToClient(new Message1(MessageType.logIn,userType));
+				break;
+			default:
+				break;
+			}
+			
+			
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 
 	 
   }
@@ -105,59 +121,7 @@ public class EchoServer extends AbstractServer
   }
   
  
-  @Override
-	protected void clientConnected(ConnectionToClient client) 
-	{
-	    ip=client.getInetAddress().getHostAddress();
-	    host=client.getInetAddress().getHostName();
-		String ipAddress = client.getInetAddress().getHostAddress();
-		String hostName = client.getInetAddress().getHostName();
-		ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Connected");
-		System.out.println("Client connected: " + client);
-		System.out.println("IP: " + ipAddress);
-		System.out.println("Host: " + hostName);
-	}
   
-	
-	//@Override
-	//synchronized protected void clientDisconnected(ConnectionToClient client) 
-	//{
-		//System.out.println("yoyo");
-		//String ipAddress = client.getInetAddress().getHostAddress();
-		//String hostName = client.getInetAddress().getHostName();
-		//ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Disconnected");
-		//System.out.println("Client disconnected: " + client);
-	//}
-	@Override
-	synchronized protected void clientDisconnected(
-		    ConnectionToClient client) {
-		System.out.println("yoyo");
-		if (ServerUI.aFrame != null) {
-			System.out.println("yoyo");
-			//String ipAddress = client.getInetAddress().getHostAddress();
-			//String hostName = client.getInetAddress().getHostName();
-			ServerUI.aFrame.addClientConnection(client.getInetAddress().getHostAddress(), client.getInetAddress().getHostName(), "Disconnected");
-			System.out.println("Client disconnected: " + client);
-			//System.out.println("Client disconnected: " + client);
-		}
-		
-	}
-	
-	@Override
-	synchronized protected void clientException(ConnectionToClient client, Throwable exception) 
-	{
-		ServerPortFrameController1 aa;
-		aa=ServerUI.aFrame;
-		if(aa==null)
-		{
-			System.out.println("null");
-		}
-		//String ipAddress = client.getInetAddress().getHostAddress();
-		//String hostName = client.getInetAddress().getHostName();
-		aa.addClientConnection(ip, host, "Disconnected");
-		//System.out.println("Client disconnected: " + client);
-		//System.out.println("Client disconnected: " + client);
-	}
 	
 	
 	

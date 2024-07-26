@@ -113,7 +113,7 @@ public class mysqlConnection {
 
         return list;
      }
-	public static String userLogIn(String username, String password) {
+    public static String userLogIn(String username, String password) {
 		try {
 	           Statement stmt = con.createStatement();
 	           ResultSet res = stmt.executeQuery("SELECT * FROM project.users;");
@@ -131,7 +131,6 @@ public class mysqlConnection {
 		return "error";
 
 	}
-	
 	
 }
 

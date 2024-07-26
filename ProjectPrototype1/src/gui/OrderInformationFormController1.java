@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logic.Message1;
+import logic.MessageType;
 import logic.Order;
 
 public class OrderInformationFormController1 implements Initializable {
@@ -80,7 +82,7 @@ public class OrderInformationFormController1 implements Initializable {
 		Order newOrder = new Order(orderNum,res,price,address,listNum);
 		// Send the order object to the server
 				try {
-					ClientUI.chat.accept(newOrder);
+					ClientUI.chat.accept(new Message1(MessageType.updateOrder,newOrder));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
