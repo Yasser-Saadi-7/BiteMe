@@ -31,12 +31,14 @@ public class LogInController {
 	@FXML
 	private Label txtmessage;
 	
+	@FXML
+	private Label txterrormsg;
 	
 	public void logIn(ActionEvent event) throws Exception{
 		ArrayList<String> arr = new ArrayList<>();
 		String result;
 		if(txtusername.getText().trim().isEmpty() || txtpassword.getText().trim().isEmpty()) {
-			updateTextMessage("Please enter user name or password");
+			updateTextMessage("Please Re-enter user name or password");
 		}else {
 			arr.add("LogIn");
 			arr.add(txtusername.getText());
@@ -50,6 +52,12 @@ public class LogInController {
 				
 			}else if(result.equals("Sponser")){
 				
+			}else if(result.equals("BranchManger")){
+				
+			}else if(result.equals("Sponser")){
+				
+			}else if(result.equals("QualifiedWorker")){
+				
 			}
 		}
 	}
@@ -62,8 +70,9 @@ public class LogInController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+	//showing the user that user name/password is incorrect
 	public void updateTextMessage(String message) {
-		txtmessage.setText(message);
+		txterrormsg.setText(message);
 	}
 	
 	

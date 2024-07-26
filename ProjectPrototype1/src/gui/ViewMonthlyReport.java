@@ -38,13 +38,22 @@ public class ViewMonthlyReport {
 
     private int currentManagerId; // ID of the logged-in manager
 
+	public void start(Stage primaryStage) throws Exception {
+		Parent root = FXMLLoader.load(getClass().getResource("/gui/LogIn.fxml"));
+		Scene scene = new Scene(root);
+		//scene.getStylesheets().add(getClass().getResource("/gui/OrderTrack.css").toExternalForm());
+		primaryStage.setTitle("LogIn Page");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+	
     @FXML
     private void initialize() {
         // Initialize months
         btnchooseMcombo.getItems().addAll(
             "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December");
-
+         //Assign every manager to its OWN branch
         // Load branches for the current manager if the ID is valid
         if (currentManagerId > 0) {
             mysqlConnection.BranchService branchService = new mysqlConnection.BranchService();
@@ -119,6 +128,7 @@ public class ViewMonthlyReport {
         System.out.println("Order Report Logic");
     }
 
+    
     // Method to check if both ComboBoxes have a selected item
     private boolean isInputValid() {
         if (chooseBrcombo.getValue() == null || btnchooseMcombo.getValue() == null) {

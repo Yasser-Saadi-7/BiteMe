@@ -36,6 +36,9 @@ public class CreateAccountController {
 	@FXML
 	private Label txtmessage;
 	
+	@FXML
+	private Label newAcctxt;
+	
 
     public void createAccount(ActionEvent event) throws Exception{
         String firstName = Fnametxt.getText();
@@ -60,16 +63,26 @@ public class CreateAccountController {
     			arr1.add(creditCard);
     			ClientUI.chat.accept(arr1);
     			newAcc=ChatClient.CreateAccount;
+    			updateTextMessage("New Account has been created");
     		}
 
 }
-    
-    public void updateTextMessage(String message) {
-		txtmessage.setText(message);
+
+	public void start(Stage primaryStage) throws Exception {
+		Parent root = FXMLLoader.load(getClass().getResource("/gui/LogIn.fxml"));
+		Scene scene = new Scene(root);
+		//scene.getStylesheets().add(getClass().getResource("/gui/OrderTrack.css").toExternalForm());
+		primaryStage.setTitle("LogIn Page");
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 	
-    
-    private void clearFields() {
+    public void updateTextMessage(String message) {
+		txtmessage.setText(message);
+		newAcctxt.setText(message);
+	}
+	
+        private void clearFields() {
         Fnametxt.clear();
         Lnametxt.clear();
         Phonetxt.clear();

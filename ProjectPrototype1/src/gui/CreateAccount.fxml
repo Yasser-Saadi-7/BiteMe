@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="button" stylesheets="@ViewOrder.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="button" stylesheets="@ViewOrder.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateAccountController">
    <children>
-      <Label layoutX="169.0" layoutY="23.0" text="Create Account" textFill="#1c4271" underline="true">
+      <Label layoutX="160.0" layoutY="30.0" text="Create Account" textFill="#1c4271" underline="true">
          <font>
             <Font size="36.0" />
          </font>
@@ -43,7 +43,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="createBtn" layoutX="214.0" layoutY="319.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" text="Create">
+      <Button fx:id="createBtn" layoutX="214.0" layoutY="314.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" text="Create">
          <font>
             <Font size="24.0" />
          </font>
@@ -59,5 +59,12 @@
       <TextField fx:id="Phonetxt" layoutX="151.0" layoutY="178.0" />
       <TextField fx:id="Emailtxt" layoutX="151.0" layoutY="206.0" />
       <TextField fx:id="Credittxt" layoutX="151.0" layoutY="233.0" />
+      <Label fx:id="newAcctxt" layoutX="365.0" layoutY="365.0" textFill="#00f2ff">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="newAcctxt" layoutX="546.0" layoutY="367.0" prefHeight="15.0" prefWidth="37.0" text=" " textFill="#55f9ff" />
+      <Button fx:id="btnclose" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="31.0" prefWidth="64.0" text="BACK" />
    </children>
 </Pane>
