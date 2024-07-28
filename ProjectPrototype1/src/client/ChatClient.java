@@ -3,7 +3,10 @@ package client;
 import ocsf.client.*;
 import client.*;
 import common.ChatIF;
+import logic.MealsType;
+import logic.Message1;
 import logic.Order;
+import logic.Restaurant;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -34,6 +37,8 @@ public class ChatClient extends AbstractClient
   public static String logIn = "error";
   public static String CreateAccount = "error1";
   public static String ViewMonthlyReport = "error2";
+  public static ArrayList<Restaurant> resList;
+  public static ArrayList<MealsType> mealsTypeList;
   
 
   //Constructors ****************************************************
@@ -63,24 +68,37 @@ public class ChatClient extends AbstractClient
    */
   public void handleMessageFromServer(Object msg) 
   {
-	  Order order;
 	  System.out.println("--> handleMessageFromServer");
-     
 	  awaitResponse = false;
-	  if(msg instanceof Order) {
-		  order=(Order)msg;
-		  o1.setListNumber(order.getListNumber());
-		  o1.setOrderAddress(order.getOrderAddress());
-		  o1.setOrederNumber(order.getOrederNumber());
-		  o1.setRestaurant(order.getRestaurant());
-		  o1.setTprice(order.getTprice());
-	  }else if(msg instanceof ArrayList) {
-		  list=(ArrayList)msg;
-	  }
-	  else {
-		  String st;
-		  st=msg.toString();
-		  o1.setOrederNumber("Error");
+	  Message1 m = (Message1) msg;
+	  
+	  switch (m.getMessageType()) {
+	  case searchOrder:
+		  Order order = (Order)m.getObject();
+		  if(order!=null) {
+			  o1.setListNumber(order.getListNumber());
+			  o1.setOrderAddress(order.getOrderAddress());
+			  o1.setOrederNumber(order.getOrederNumber());
+			  o1.setRestaurant(order.getRestaurant());
+			  o1.setTprice(order.getTprice());
+		  }else {
+			  o1.setOrederNumber("Error");
+		  }
+		  break;
+	  case viewOrdersList:
+		  list=(ArrayList<Order>)m.getObject();
+		  break;
+	  case logIn:
+		  logIn=(String)m.getObject();
+		  break;
+	  case showRestaurant:
+		  resList=(ArrayList<Restaurant>)m.getObject();
+		  break;
+	  case mealsType:
+		  mealsTypeList=(ArrayList<MealsType>)m.getObject();
+		  break;
+	  default:
+		  break;
 	  }
 	 
   }

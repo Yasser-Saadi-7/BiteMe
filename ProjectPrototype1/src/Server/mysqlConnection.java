@@ -8,7 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.MealsType;
 import logic.Order;
+import logic.Restaurant;
 
 
 
@@ -182,7 +184,44 @@ public class mysqlConnection {
 //
 //	}
 //	
-	
+    public static ArrayList<Restaurant> getAllRes(){
+		ArrayList<Restaurant> allRes = new ArrayList<Restaurant>();
+		try {
+	           Statement stmt = con.createStatement();
+	           ResultSet res = stmt.executeQuery("SELECT * FROM project.restaurant;");
+
+	           while(res.next()) {
+	              allRes.add(new Restaurant(res.getString(1), res.getString(2), res.getString(3), res.getString(4)));
+	           }
+
+	           res.close();
+	        } catch (SQLException var5) {
+	           var5.printStackTrace();
+	        }
+		return allRes;
+		
+		
+	}
+    
+    public static ArrayList<MealsType> getMealsType(String resName){
+		ArrayList<MealsType> allMealsType = new ArrayList<MealsType>();
+		try {
+	           Statement stmt = con.createStatement();
+	           ResultSet res = stmt.executeQuery("SELECT * FROM project.mealtype;");
+
+	           while(res.next()) {
+	              if(resName.equals(res.getString(1))) {
+	            	  allMealsType.add(new MealsType(res.getString(1), res.getString(2), res.getString(3)));
+	              }
+	           }
+
+	           res.close();
+	        } catch (SQLException var5) {
+	           var5.printStackTrace();
+	        }
+		return allMealsType;
+		
+	}
 }
 
 
