@@ -54,8 +54,6 @@ public class LogInController {
 				
 			}else if(result.equals("BranchManger")){
 				
-			}else if(result.equals("Sponser")){
-				
 			}else if(result.equals("QualifiedWorker")){
 				
 			}
