@@ -32,15 +32,18 @@ public class ClientConnectionController implements Initializable {
 		e.printStackTrace();
 	}
       Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-      LogInController logInController = new LogInController();
+      
+      
+      //LogInController logInController = new LogInController();
+      BranchManagerController BranchMangerController = new BranchManagerController();
+      
       try {
-    	  logInController.start(stage);
+    	//logInController.start(stage);
+    	BranchMangerController.start(stage);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-
-      
 
    }
 

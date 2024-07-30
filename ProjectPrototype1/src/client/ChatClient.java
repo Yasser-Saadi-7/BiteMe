@@ -32,9 +32,16 @@ public class ChatClient extends AbstractClient
   public static ArrayList<Order> list;
   public static boolean awaitResponse = false;
   public static String logIn = "error";
-  public static String CreateAccount = "error1";
-  public static String ViewMonthlyReport = "error2";
-  
+  //Checks that no two users with SAME ID in the DB
+  public static String CheckUserIdResponse; // Field to hold the response
+
+  public static void handleServerResponse(String response) {
+      // Logic to handle various responses from the server
+      if (response.startsWith("CheckUserId:")) {
+          // Extract the response message after the command
+          CheckUserIdResponse = response.split(":")[1]; // Assuming response format is "CheckUserId:Exists" or "CheckUserId:Unique"
+      }
+  }
 
   //Constructors ****************************************************
   
