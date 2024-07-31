@@ -13,42 +13,42 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="96.0" text="First Name:" textFill="WHITE">
+      <Label layoutX="42.0" layoutY="96.0" text="* First Name:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="177.0" text="Phone:" textFill="WHITE">
+      <Label layoutX="42.0" layoutY="177.0" text="* Phone:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="43.0" layoutY="150.0" text="ID:" textFill="WHITE">
+      <Label layoutX="43.0" layoutY="150.0" text="* ID:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="43.0" layoutY="123.0" text="Last Name:" textFill="WHITE">
+      <Label layoutX="43.0" layoutY="123.0" text="* Last Name:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="204.0" text="E-mail:" textFill="WHITE">
+      <Label layoutX="42.0" layoutY="204.0" text="* E-mail:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="40.0" layoutY="231.0" text="Credit Card:" textFill="#86aeef">
+      <Label layoutX="40.0" layoutY="234.0" text="Credit Card:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="createBtn" layoutX="214.0" layoutY="314.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" text="Create">
+      <Button fx:id="createBtn" layoutX="201.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleCreateButton" prefHeight="45.0" prefWidth="151.0" text="Create">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="infolabel" layoutX="42.0" layoutY="275.0" text="Please Fill All Fields" textFill="#95c5fc">
+      <Label fx:id="txtmessage" layoutX="40.0" layoutY="272.0" text="Please Fill All Fields" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -59,12 +59,12 @@
       <TextField fx:id="Phonetxt" layoutX="151.0" layoutY="178.0" />
       <TextField fx:id="Emailtxt" layoutX="151.0" layoutY="206.0" />
       <TextField fx:id="Credittxt" layoutX="151.0" layoutY="233.0" />
-      <Label fx:id="newAcctxt" layoutX="365.0" layoutY="365.0" textFill="#00f2ff">
+      <Label fx:id="newAcctxt" layoutX="214.0" layoutY="345.0" text="New account created" textFill="#170a2e" visible="false">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="newAcctxt" layoutX="546.0" layoutY="367.0" prefHeight="15.0" prefWidth="37.0" text=" " textFill="#55f9ff" />
       <Button fx:id="btnclose" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="31.0" prefWidth="64.0" text="BACK" />
+      <Button fx:id="clrFields" layoutX="237.0" layoutY="366.0" mnemonicParsing="false" onAction="#handleClearFieldsButton" prefHeight="31.0" prefWidth="80.0" text="Clear Fields" />
    </children>
 </Pane>

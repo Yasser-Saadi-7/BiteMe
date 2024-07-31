@@ -1,28 +1,21 @@
-// This file contains material supporting section 3.7 of the textbook:
-// "Object Oriented Software Engineering" and is issued under the open-source
-// license found at www.lloseng.com 
 package Server;
 
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Vector;
-
 import client.ChatClient;
-import client.ClientController;
 import gui.ServerPortFrameController1;
 import logic.ClientConnectionDetails;
 import logic.MealsType;
 import logic.Message1;
 import logic.MessageType;
 import logic.Order;
+
 import logic.Restaurant;
 import ocsf.server.*;
 
-/**
- * This class overrides some of the methods in the abstract 
- * superclass in order to give more functionality to the server.
- *
- */
+
+
+
+
 
 public class EchoServer extends AbstractServer 
 {
@@ -170,23 +163,16 @@ public class EchoServer extends AbstractServer
 		
 	}
 	
-	@Override
-	synchronized protected void clientException(ConnectionToClient client, Throwable exception) 
-	{
-		ServerPortFrameController1 aa;
-		aa=ServerUI.aFrame;
-		if(aa==null)
-		{
-			System.out.println("null");
-		}
-		//String ipAddress = client.getInetAddress().getHostAddress();
-		//String hostName = client.getInetAddress().getHostName();
-		aa.addClientConnection(ip, host, "Disconnected");
-		//System.out.println("Client disconnected: " + client);
-		//System.out.println("Client disconnected: " + client);
-	}
 	
 	
-	
+
+    @Override
+    synchronized protected void clientException(ConnectionToClient client, Throwable exception) {
+        String ipAddress = client.getInetAddress().getHostAddress();
+        String hostName = client.getInetAddress().getHostName();
+        ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Disconnected");
+        System.out.println("Exception occurred for client: " + client);
+    }
+
 }
-//End of EchoServer class
+// End of EchoServer class

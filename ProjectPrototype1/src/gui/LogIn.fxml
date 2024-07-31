@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="button" stylesheets="@ViewOrder.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LogInController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="button" stylesheets="@ViewOrder.css" xmlns="http://javafx.com/javafx/1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LogInController">
    <children>
       <Label layoutX="200.0" layoutY="30.0" text="LogIn Page" textFill="#1c4271" underline="true">
          <font>
@@ -16,21 +16,25 @@
       <Label layoutX="152.0" layoutY="138.0" text="User Name:" textFill="WHITE">
          <font>
             <Font size="18.0" />
-         </font></Label>
+         </font>
+      </Label>
       <Label layoutX="152.0" layoutY="183.0" text="Password:" textFill="WHITE">
          <font>
             <Font size="18.0" />
-         </font></Label>
+         </font>
+      </Label>
       <TextField fx:id="txtusername" layoutX="240.0" layoutY="140.0" onAction="#logIn" />
       <TextField fx:id="txtpassword" layoutX="240.0" layoutY="180.0" onAction="#logIn" />
       <Button fx:id="btnlogIn" layoutX="240.0" layoutY="245.0" mnemonicParsing="false" onAction="#logIn" prefHeight="45.0" prefWidth="126.0" text="Log In">
          <font>
             <Font size="24.0" />
-         </font></Button>
+         </font>
+      </Button>
       <Label fx:id="txtmessage" layoutX="152.0" layoutY="103.0" text="Please Enter User name and Password" textFill="#17385e">
          <font>
             <Font size="18.0" />
-         </font></Label>
+         </font>
+      </Label>
       <Button fx:id="btnclose" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#closePage" prefHeight="31.0" prefWidth="64.0" text="BACK" />
       <Label fx:id="txterrormsg" layoutX="152.0" layoutY="214.0" prefHeight="23.0" prefWidth="272.0">
          <font>

@@ -1,7 +1,5 @@
 package client;
 
-//yasser
-
 import logic.Order;
 
 
@@ -19,7 +17,6 @@ public class ClientUI extends Application {
 
 	public static void main( String args[] ) throws Exception
 	   {
-	
 		    //host=args[0];
 		    launch(args);  
 	   } // end main
