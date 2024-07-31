@@ -3,7 +3,10 @@ package client;
 import ocsf.client.*;
 import client.*;
 import common.ChatIF;
+import logic.MealsType;
+import logic.Message1;
 import logic.Order;
+import logic.Restaurant;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -22,7 +25,15 @@ public class ChatClient extends AbstractClient {
   public static ArrayList<Order> list;
   public static boolean awaitResponse = false;
   public static String logIn = "error";
+
+  public static String CreateAccount = "error1";
+  public static String ViewMonthlyReport = "error2";
+  public static ArrayList<Restaurant> resList;
+  public static ArrayList<MealsType> mealsTypeList;
+  
+
   public static String CheckUserIdResponse; // Field to hold the response
+
 
   // Constructors ****************************************************
   
@@ -33,24 +44,48 @@ public class ChatClient extends AbstractClient {
 
   // Instance methods ************************************************
     
-  public void handleMessageFromServer(Object msg) {
-	    System.out.println("--> handleMessageFromServer");
-	    awaitResponse = false; // Resetting awaitResponse flag
-	    if (msg instanceof Order) {
-	        Order order = (Order) msg;
-	        o1.setListNumber(order.getListNumber());
-	        o1.setOrderAddress(order.getOrderAddress());
-	        o1.setOrederNumber(order.getOrederNumber());
-	        o1.setRestaurant(order.getRestaurant());
-	        o1.setTprice(order.getTprice());
-	    } else if (msg instanceof ArrayList) {
-	        list = (ArrayList) msg; // Assuming list is defined as an instance variable
-	    } else if (msg instanceof String) { // Handle String responses from the server
-	        handleServerResponse((String) msg); // Call the method to handle response
-	    } else {
-	        o1.setOrederNumber("Error");
-	    }
-	}
+
+  /**
+   * This method handles all data that comes in from the server.
+   *
+   * @param msg The message from the server.
+   */
+  public void handleMessageFromServer(Object msg) 
+  {
+	  System.out.println("--> handleMessageFromServer");
+	  awaitResponse = false;
+	  Message1 m = (Message1) msg;
+	  
+	  switch (m.getMessageType()) {
+	  case searchOrder:
+		  Order order = (Order)m.getObject();
+		  if(order!=null) {
+			  o1.setListNumber(order.getListNumber());
+			  o1.setOrderAddress(order.getOrderAddress());
+			  o1.setOrederNumber(order.getOrederNumber());
+			  o1.setRestaurant(order.getRestaurant());
+			  o1.setTprice(order.getTprice());
+		  }else {
+			  o1.setOrederNumber("Error");
+		  }
+		  break;
+	  case viewOrdersList:
+		  list=(ArrayList<Order>)m.getObject();
+		  break;
+	  case logIn:
+		  logIn=(String)m.getObject();
+		  break;
+	  case showRestaurant:
+		  resList=(ArrayList<Restaurant>)m.getObject();
+		  break;
+	  case mealsType:
+		  mealsTypeList=(ArrayList<MealsType>)m.getObject();
+		  break;
+	  default:
+		  break;
+	  }
+	 
+  }
 
 	// Method to handle server responses
 	public static void handleServerResponse(String response) {
