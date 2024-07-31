@@ -1,5 +1,6 @@
 package Server;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import client.ChatClient;
 import gui.ServerPortFrameController1;
@@ -13,7 +14,11 @@ import logic.Restaurant;
 import ocsf.server.*;
 
 
-
+/**
+ * This class overrides some of the methods in the abstract 
+ * superclass in order to give more functionality to the server.
+ *
+ */
 
 
 
@@ -125,18 +130,18 @@ public class EchoServer extends AbstractServer
   }
   
  
-  @Override
-	protected void clientConnected(ConnectionToClient client) 
-	{
-	    ip=client.getInetAddress().getHostAddress();
-	    host=client.getInetAddress().getHostName();
-		String ipAddress = client.getInetAddress().getHostAddress();
-		String hostName = client.getInetAddress().getHostName();
-		ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Connected");
-		System.out.println("Client connected: " + client);
-		System.out.println("IP: " + ipAddress);
-		System.out.println("Host: " + hostName);
-	}
+//  @Override
+//	protected void clientConnected(ConnectionToClient client) 
+//	{
+//	    ip=client.getInetAddress().getHostAddress();
+//	    host=client.getInetAddress().getHostName();
+//		String ipAddress = client.getInetAddress().getHostAddress();
+//		String hostName = client.getInetAddress().getHostName();
+//		ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Connected");
+//		System.out.println("Client connected: " + client);
+//		System.out.println("IP: " + ipAddress);
+//		System.out.println("Host: " + hostName);
+//	}
   
 	
 	//@Override
@@ -148,31 +153,31 @@ public class EchoServer extends AbstractServer
 		//ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Disconnected");
 		//System.out.println("Client disconnected: " + client);
 	//}
-	@Override
-	synchronized protected void clientDisconnected(
-		    ConnectionToClient client) {
-		System.out.println("yoyo");
-		if (ServerUI.aFrame != null) {
-			System.out.println("yoyo");
-			//String ipAddress = client.getInetAddress().getHostAddress();
-			//String hostName = client.getInetAddress().getHostName();
-			ServerUI.aFrame.addClientConnection(client.getInetAddress().getHostAddress(), client.getInetAddress().getHostName(), "Disconnected");
-			System.out.println("Client disconnected: " + client);
-			//System.out.println("Client disconnected: " + client);
-		}
-		
-	}
+//	@Override
+//	synchronized protected void clientDisconnected(
+//		    ConnectionToClient client) {
+//		System.out.println("yoyo");
+//		if (ServerUI.aFrame != null) {
+//			System.out.println("yoyo");
+//			//String ipAddress = client.getInetAddress().getHostAddress();
+//			//String hostName = client.getInetAddress().getHostName();
+//			ServerUI.aFrame.addClientConnection(client.getInetAddress().getHostAddress(), client.getInetAddress().getHostName(), "Disconnected");
+//			System.out.println("Client disconnected: " + client);
+//			//System.out.println("Client disconnected: " + client);
+//		}
+//		
+//	}
 	
 	
 	
 
-    @Override
-    synchronized protected void clientException(ConnectionToClient client, Throwable exception) {
-        String ipAddress = client.getInetAddress().getHostAddress();
-        String hostName = client.getInetAddress().getHostName();
-        ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Disconnected");
-        System.out.println("Exception occurred for client: " + client);
-    }
+//    @Override
+//    synchronized protected void clientException(ConnectionToClient client, Throwable exception) {
+//        String ipAddress = client.getInetAddress().getHostAddress();
+//        String hostName = client.getInetAddress().getHostName();
+//        ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Disconnected");
+//        System.out.println("Exception occurred for client: " + client);
+//    }
 
 }
 // End of EchoServer class
