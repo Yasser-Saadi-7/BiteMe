@@ -6,49 +6,49 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="button" stylesheets="@ViewOrder.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateAccountController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="button" stylesheets="@ViewOrder.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateAccountController">
    <children>
       <Label layoutX="160.0" layoutY="30.0" text="Create Account" textFill="#1c4271" underline="true">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="96.0" text="First Name:" textFill="WHITE">
+      <Label layoutX="42.0" layoutY="96.0" text="* First Name:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="177.0" text="Phone:" textFill="WHITE">
+      <Label layoutX="42.0" layoutY="177.0" text="* Phone:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="43.0" layoutY="150.0" text="ID:" textFill="WHITE">
+      <Label layoutX="43.0" layoutY="150.0" text="* ID:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="43.0" layoutY="123.0" text="Last Name:" textFill="WHITE">
+      <Label layoutX="43.0" layoutY="123.0" text="* Last Name:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="204.0" text="E-mail:" textFill="WHITE">
+      <Label layoutX="42.0" layoutY="204.0" text="* E-mail:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="40.0" layoutY="231.0" text="Credit Card:" textFill="WHITE">
+      <Label layoutX="40.0" layoutY="234.0" text="Credit Card:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="createBtn" layoutX="213.0" layoutY="294.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" text="Create" onAction="#createAccount">
+      <Button fx:id="createBtn" layoutX="201.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleCreateButton" prefHeight="45.0" prefWidth="151.0" text="Create">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="txtmessage" layoutX="40.0" layoutY="265.0" text="Please Fill All Fields" textFill="WHITE">
+      <Label fx:id="txtmessage" layoutX="40.0" layoutY="272.0" text="Please Fill All Fields" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -65,5 +65,6 @@
          </font>
       </Label>
       <Button fx:id="btnclose" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="31.0" prefWidth="64.0" text="BACK" />
+      <Button fx:id="clrFields" layoutX="237.0" layoutY="366.0" mnemonicParsing="false" onAction="#handleClearFieldsButton" prefHeight="31.0" prefWidth="80.0" text="Clear Fields" />
    </children>
 </Pane>

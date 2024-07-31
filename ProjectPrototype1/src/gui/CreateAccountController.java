@@ -1,11 +1,6 @@
 package gui;
 
 import javafx.fxml.FXML;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import client.ChatClient;
-import client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import client.ChatClient;
+import client.ClientUI;
+import java.io.IOException;
+import client.AccountCreationCommand; // Import the enum
 
 // Create Account PAGE
 public class CreateAccountController {
@@ -48,62 +47,73 @@ public class CreateAccountController {
     @FXML
     private Button createBtn;
 
+    @FXML
+    private Button clrFields;
+
+    // Method to handle the Create button click
+    @FXML
+    private void handleCreateButton(ActionEvent event) {
+        createAccount(event); // Call the createAccount method when the create button is clicked
+    }
+
     // Method to create a new account
-    public void createAccount(ActionEvent event) throws Exception {
+    public void createAccount(ActionEvent event) {
         String firstName = Fnametxt.getText();
         String lastName = Lnametxt.getText();
         String phone = Phonetxt.getText();
         String id = IDtxt.getText();
         String email = Emailtxt.getText();
         String creditCard = Credittxt.getText();
-        ArrayList<String> arr1 = new ArrayList<>();
 
         // Check if all fields are filled
         if (firstName.trim().isEmpty() || lastName.trim().isEmpty()
                 || phone.trim().isEmpty() || id.trim().isEmpty()
-                || email.trim().isEmpty() || creditCard.trim().isEmpty()) {
-            updateTextMessage("Please fill ALL Fields");
+                || email.trim().isEmpty()) {
+            updateTextMessage("All fields marked with * are required. Please fill them out to proceed with account creation.");
             newAcctxt.setVisible(false); // Hide the label if not all fields are filled
-        } else {
-            // Check if the user ID is unique
-            if (!isUserIdUnique(id)) {
-                updateTextMessage("User ID already exists. Please choose a different ID.");
-                newAcctxt.setVisible(false); // Hide the label if the user ID is not unique
-                return; // Exit the method early
-            }
-
-            // Create account logic
-            arr1.add("CreateAccount");
-            arr1.add(firstName);
-            arr1.add(lastName);
-            arr1.add(phone);
-            arr1.add(id);
-            arr1.add(email);
-            arr1.add(creditCard);
-            ClientUI.chat.accept(arr1);
-            String newAcc = ChatClient.CheckUserIdResponse;
-            updateTextMessage("New Account has been created");
-            newAcctxt.setVisible(true); // Show the label when the account is created successfully
-            newAcctxt.setText("New Account has been created"); // Set success message
+            return;
         }
+
+        // Create the account on the server
+        createAccountOnServer(firstName, lastName, phone, id, email, creditCard);
     }
 
-    // Method to check if the user ID is unique
-    private boolean isUserIdUnique(String userId) {
-        ArrayList<String> arr1 = new ArrayList<>();
-        arr1.add("CheckUserId");
-        arr1.add(userId);
-        ClientUI.chat.accept(arr1);
+    private void createAccountOnServer(String firstName, String lastName, String phone, String id, String email, String creditCard) {
+        // Prepare the account creation command using enum
+        String[] accountDetails = {
+            AccountCreationCommand.CREATE_ACCOUNT.getCommand(),
+            firstName,
+            lastName,
+            phone,
+            id,
+            email,
+            creditCard
+        };
 
-        // Wait for the response (implement your response handling correctly)
-        try {
-            Thread.sleep(100); // Wait for a short moment for the response to arrive
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        // Send the create account request
+        ClientUI.chat.accept(accountDetails); // Send command to server
+
+        // Update response message based on server reply
+        updateResponseMessage();
+    }
+
+    private void updateResponseMessage() {
+        // Assuming that ChatClient has a way to store responses
+        String createAccountResponse = ChatClient.CheckUserIdResponse; // This variable should be updated based on server response
+        System.out.println("Received response from server: " + createAccountResponse); // Debugging line
+
+        // Handle response from the server
+        if (createAccountResponse != null) {
+            if ("Success: New Account has been created.".equals(createAccountResponse)) {
+                updateTextMessage("New Account has been created.");
+                newAcctxt.setVisible(true);
+            } else {
+                updateTextMessage("Failed to create the account. Please try again.");
+                newAcctxt.setVisible(false);
+            }
+        } else {
+            updateTextMessage("No response from server. Please check the connection.");
         }
-
-        // Return true if ID is unique
-        return "Unique".equals(ChatClient.CheckUserIdResponse);
     }
 
     // Method to handle Close button click (go back to BranchManagerPage.fxml)
@@ -111,6 +121,29 @@ public class CreateAccountController {
     private void handleCloseButton(ActionEvent event) {
         Stage currentStage = (Stage) btnclose.getScene().getWindow();
         openFXML("BranchManagerPage.fxml", "Branch Manager", currentStage);
+    }
+
+    // Method to handle server disconnection (if needed)
+    private void closePage() {
+        System.out.println("Server Disconnected!");
+        System.exit(0);
+    }
+
+    // Method to handle Clear Fields button click
+    @FXML
+    private void handleClearFieldsButton(ActionEvent event) {
+        clearFields(); // Call the clearFields method
+    }
+
+    // Existing clearFields method
+    private void clearFields() {
+        Fnametxt.clear();
+        Lnametxt.clear();
+        Phonetxt.clear();
+        IDtxt.clear();
+        Emailtxt.clear();
+        Credittxt.clear();
+        newAcctxt.setVisible(false); // Hide the account created message
     }
 
     // Helper method to open FXML files
@@ -138,20 +171,5 @@ public class CreateAccountController {
 
     public void updateTextMessage(String message) {
         txtmessage.setText(message);
-    }
-
-    private void clearFields() {
-        Fnametxt.clear();
-        Lnametxt.clear();
-        Phonetxt.clear();
-        IDtxt.clear();
-        Emailtxt.clear();
-        Credittxt.clear();
-    }
-
-    // Method to handle server disconnection (if needed)
-    private void closePage() {
-        System.out.println("Server Disconnected!");
-        System.exit(0);
     }
 }
