@@ -51,6 +51,7 @@ public class ChatClient extends AbstractClient {
 	        o1.setOrederNumber("Error");
 	    }
 	}
+  
 
 	// Method to handle server responses
 	public static void handleServerResponse(String response) {
@@ -62,6 +63,9 @@ public class ChatClient extends AbstractClient {
 	        CheckUserIdResponse = response; // Store the response for account creation
 	    }
 	}
+
+
+   
 
 
   public void handleMessageFromClientUI(Object message)  {

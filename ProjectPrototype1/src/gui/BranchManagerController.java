@@ -52,8 +52,14 @@ public class BranchManagerController {
         Stage stage = (Stage) btnclose.getScene().getWindow();
         stage.close();
     }
+    // Method to handle server disconnection and close/back button
+    private void closePage() {
+        System.out.println("Server Disconnected!");
+        System.exit(0);
+    }
+    
 
-    // Helper method to open FXML files
+    //Method to open FXML files
     private void openFXML(String fxmlFile, String title, Stage currentStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -85,9 +91,5 @@ public class BranchManagerController {
         primaryStage.show();
     }
 
-    // Method to handle server disconnection and close/back button
-    private void closePage() {
-        System.out.println("Server Disconnected!");
-        System.exit(0);
-    }
+   
 }

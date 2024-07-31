@@ -50,6 +50,12 @@ public class CreateAccountController {
     @FXML
     private Button clrFields;
 
+    // Method called when the controller is initialized
+    @FXML
+    public void initialize() {
+        newAcctxt.setVisible(false); // Initially set newAcctxt to be invisible
+    }
+
     // Method to handle the Create button click
     @FXML
     private void handleCreateButton(ActionEvent event) {
@@ -70,7 +76,7 @@ public class CreateAccountController {
                 || phone.trim().isEmpty() || id.trim().isEmpty()
                 || email.trim().isEmpty()) {
             updateTextMessage("All fields marked with * are required. Please fill them out to proceed with account creation.");
-            newAcctxt.setVisible(false); // Hide the label if not all fields are filled
+            newAcctxt.setVisible(false); // Ensure the label is hidden if fields are empty
             return;
         }
 
@@ -106,13 +112,14 @@ public class CreateAccountController {
         if (createAccountResponse != null) {
             if ("Success: New Account has been created.".equals(createAccountResponse)) {
                 updateTextMessage("New Account has been created.");
-                newAcctxt.setVisible(true);
+                newAcctxt.setVisible(true); // Show the label if account creation is successful
             } else {
                 updateTextMessage("Failed to create the account. Please try again.");
-                newAcctxt.setVisible(false);
+                newAcctxt.setVisible(false); // Hide if account creation fails
             }
         } else {
             updateTextMessage("No response from server. Please check the connection.");
+            newAcctxt.setVisible(false); // Hide if no response is received
         }
     }
 
