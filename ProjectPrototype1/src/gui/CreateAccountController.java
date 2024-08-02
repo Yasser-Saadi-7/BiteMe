@@ -9,10 +9,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import logic.Message1;
+import logic.MessageType;
 import client.ChatClient;
 import client.ClientUI;
+import client.AccountCreationCommand; // Ensure this import is present
+import javafx.application.Platform;
+
 import java.io.IOException;
-import client.AccountCreationCommand; // Import the enum
 
 // Create Account PAGE
 public class CreateAccountController {
@@ -59,11 +63,11 @@ public class CreateAccountController {
     // Method to handle the Create button click
     @FXML
     private void handleCreateButton(ActionEvent event) {
-        createAccount(event); // Call the createAccount method when the create button is clicked
+        createAccount(); // Call the createAccount method when the create button is clicked
     }
 
     // Method to create a new account
-    public void createAccount(ActionEvent event) {
+    public void createAccount() {
         String firstName = Fnametxt.getText();
         String lastName = Lnametxt.getText();
         String phone = Phonetxt.getText();
@@ -80,14 +84,14 @@ public class CreateAccountController {
             return;
         }
 
-        // Create the account on the server
-        createAccountOnServer(firstName, lastName, phone, id, email, creditCard);
+        // Create the account on the server in a new thread to avoid blocking UI
+        new Thread(() -> createAccountOnServer(firstName, lastName, phone, id, email, creditCard)).start();
     }
 
     private void createAccountOnServer(String firstName, String lastName, String phone, String id, String email, String creditCard) {
         // Prepare the account creation command using enum
         String[] accountDetails = {
-            AccountCreationCommand.CREATE_ACCOUNT.getCommand(),
+            AccountCreationCommand.CREATE_ACCOUNT.getCommand(), // Use the enum properly
             firstName,
             lastName,
             phone,
@@ -97,10 +101,10 @@ public class CreateAccountController {
         };
 
         // Send the create account request
-        ClientUI.chat.accept(accountDetails); // Send command to server
+        ClientUI.chat.accept(new Message1(MessageType.createAccount, String.join(" ", accountDetails))); // Send as Message1
 
         // Update response message based on server reply
-        updateResponseMessage();
+        Platform.runLater(this::updateResponseMessage); // Ensure UI update happens on the JavaFX thread
     }
 
     private void updateResponseMessage() {

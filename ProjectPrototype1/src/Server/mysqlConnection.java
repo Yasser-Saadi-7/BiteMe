@@ -65,8 +65,7 @@ public class mysqlConnection {
     // Method to save user data to the database
     public void updateOrderToDB(Object msg) {
         String orderNum, res, price, listNum, address;
-        Order message;
-        message = (Order) msg;
+        Order message = (Order) msg;
         orderNum = message.getOrederNumber();
         PreparedStatement preparedStatement;
         try {
@@ -132,7 +131,7 @@ public class mysqlConnection {
         }
     }
 
- // Method to create a new user account
+    // Method to create a new user account
     public boolean createAccount(String firstName, String lastName, String phone, String userId, String email, String creditCard) {
         try {
             // Prepare the SQL statement with the CreditCard column that can accept NULL
@@ -159,7 +158,6 @@ public class mysqlConnection {
         }
     }
 
-
     // To help assign a branch to each manager
     public static Connection getConnection() {
         return con;
@@ -183,66 +181,41 @@ public class mysqlConnection {
             }
             return branches;
         }
+    }
 
-    
-}
-//	//Create Account 
-//	public static String CreateAccount(String ID, String Lname) {
-//		try {
-//	           Statement stmt = con.createStatement();
-//	           ResultSet res = stmt.executeQuery("SELECT * FROM project.users;");
-////check if user already exist
-//	           while(res.next()) {
-//	              if(res.getString(1).equals(ID) && res.getString(2).equals(Lname)) {
-//	            	  return res.getString(7);
-//	              }
-//	           }
-//
-//	           res.close();
-//	        } catch (SQLException var5) {
-//	           var5.printStackTrace();
-//	        }
-//		return "error";
-//
-//	}
-//	
-    public static ArrayList<Restaurant> getAllRes(){
-		ArrayList<Restaurant> allRes = new ArrayList<Restaurant>();
-		try {
-	           Statement stmt = con.createStatement();
-	           ResultSet res = stmt.executeQuery("SELECT * FROM project.restaurant;");
+    public static ArrayList<Restaurant> getAllRes() {
+        ArrayList<Restaurant> allRes = new ArrayList<Restaurant>();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM project.restaurant;");
 
-	           while(res.next()) {
-	              allRes.add(new Restaurant(res.getString(1), res.getString(2), res.getString(3), res.getString(4)));
-	           }
+            while (res.next()) {
+                allRes.add(new Restaurant(res.getString(1), res.getString(2), res.getString(3), res.getString(4)));
+            }
 
-	           res.close();
-	        } catch (SQLException var5) {
-	           var5.printStackTrace();
-	        }
-		return allRes;
-		
-		
-	}
-    
-    public static ArrayList<MealsType> getMealsType(String resName){
-		ArrayList<MealsType> allMealsType = new ArrayList<MealsType>();
-		try {
-	           Statement stmt = con.createStatement();
-	           ResultSet res = stmt.executeQuery("SELECT * FROM project.mealtype;");
+            res.close();
+        } catch (SQLException var5) {
+            var5.printStackTrace();
+        }
+        return allRes;
+    }
 
-	           while(res.next()) {
-	              if(resName.equals(res.getString(1))) {
-	            	  allMealsType.add(new MealsType(res.getString(1), res.getString(2), res.getString(3)));
-	              }
-	           }
+    public static ArrayList<MealsType> getMealsType(String resName) {
+        ArrayList<MealsType> allMealsType = new ArrayList<MealsType>();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM project.mealtype;");
 
-	           res.close();
-	        } catch (SQLException var5) {
-	           var5.printStackTrace();
-	        }
-		return allMealsType;
-		
-	}
+            while (res.next()) {
+                if (resName.equals(res.getString(1))) {
+                    allMealsType.add(new MealsType(res.getString(1), res.getString(2), res.getString(3)));
+                }
+            }
 
+            res.close();
+        } catch (SQLException var5) {
+            var5.printStackTrace();
+        }
+        return allMealsType;
+    }
 }
