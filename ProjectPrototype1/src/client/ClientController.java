@@ -3,8 +3,12 @@
 // license found at www.lloseng.com 
 package client;
 import java.io.*;
+import java.net.InetAddress;
+
 import client.*;
 import common.ChatIF;
+import logic.Message1;
+import logic.MessageType;
 
 
 /**
@@ -45,17 +49,26 @@ public class ClientController implements ChatIF
    */
   public ClientController(String host, int port) throws IOException 
   {
-	  try 
-	    {
-		  client = new ChatClient(host, port, this);
-		  this.accept("a");
-	    } 
-	    catch(IOException exception) 
-	    {
-	      System.out.println("Error: Can't setup connection!"
-	                + " Terminating client.");
-	      System.exit(1);
-	    }
+	  InetAddress ip;
+		try {
+			ip = InetAddress.getLocalHost();
+			client = new ChatClient(host, port, this);
+			accept(new Message1(MessageType.connect, ip.getHostAddress()+" "+ip.getHostName()+" "+"Connected"));
+		} catch (IOException exception) {
+			System.out.println("Error: Can't setup connection!" + " Terminating client.");
+			System.exit(1);
+		}
+//	  try 
+//	    {
+//		  client = new ChatClient(host, port, this);
+//		  this.accept("a");
+//	    } 
+//	    catch(IOException exception) 
+//	    {
+//	      System.out.println("Error: Can't setup connection!"
+//	                + " Terminating client.");
+//	      System.exit(1);
+//	    }
 	  
     
       //client= new ChatClient(host, port, this);
