@@ -45,6 +45,7 @@ public class ChatClient extends AbstractClient {
   // Instance methods ************************************************
     
 
+
   /**
    * This method handles all data that comes in from the server.
    *
@@ -97,6 +98,9 @@ public class ChatClient extends AbstractClient {
 	        CheckUserIdResponse = response; // Store the response for account creation
 	    }
 	}
+
+
+   
 
 
   public void handleMessageFromClientUI(Object message)  {
