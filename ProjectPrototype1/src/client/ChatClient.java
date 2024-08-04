@@ -2,6 +2,7 @@ package client;
 
 import ocsf.client.AbstractClient;
 import common.ChatIF;
+import logic.CreateAccount;
 import logic.MealsType;
 import logic.Message1;
 import logic.Order;
@@ -16,19 +17,18 @@ import Server.ServerUI;
  */
 public class ChatClient extends AbstractClient {
   // Instance variables **********************************************
-  
   ChatIF clientUI; 
   public static Order o1 = new Order(null, null, null, null, null);
-  public static ArrayList<Order> list;
+  
   public static boolean awaitResponse = false;
+  public static String CheckUserIdResponse; // Added 
   public static String logIn = "error";
-
-  public static String CreateAccount = "error1";
   public static String ViewMonthlyReport = "error2";
+  public static ArrayList<Order> list;
   public static ArrayList<Restaurant> resList;
   public static ArrayList<MealsType> mealsTypeList;
-  public static String CheckUserIdResponse; // Field to hold the response
-
+  public static  ArrayList<CreateAccount> CreateAccountList;
+  
   // Constructors ****************************************************
   
   public ChatClient(String host, int port, ChatIF clientUI) throws IOException {
@@ -67,9 +67,12 @@ public class ChatClient extends AbstractClient {
       case logIn:
         logIn = (String) m.getObject();
         break;
-      case createAccount: // New case for creating account
-        CreateAccount = (String) m.getObject();
+        
+      case createAccount: 
+    	  CreateAccountList = (ArrayList<CreateAccount>) m.getObject();
+    	  CheckUserIdResponse = (String) m.getObject(); // Store the server response here
         break;
+        
       case showRestaurant:
         resList = (ArrayList<Restaurant>) m.getObject();
         break;
@@ -81,19 +84,7 @@ public class ChatClient extends AbstractClient {
     }
   }
 
-  // Method to handle server responses
-  public static void handleServerResponse(String response) {
-    // Logic to handle various responses from the server
-    if (response.startsWith("CheckUserId:")) {
-      // Extract the response message after the command
-      CheckUserIdResponse = response.split(":")[1]; // Assuming response format is "CheckUserId:Exists" or "CheckUserId:Unique"
-    } else if (response.startsWith("Success:") || response.startsWith("Failed:")) {
-      CheckUserIdResponse = response; // Store the response for account creation
-    } else if (response.startsWith("CreateAccount:")) { // Handle the create account response
-      CreateAccount = response.split(":")[1]; // Store the response (Success or Failure)
-    }
-  }
-
+  
   public void handleMessageFromClientUI(Object message) {
     try {
       openConnection(); // in order to send more than one message

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import client.ChatClient;
 import gui.ServerPortFrameController1;
 import logic.ClientConnectionDetails;
+import logic.CreateAccount;
 import logic.MealsType;
 import logic.Message1;
 import logic.MessageType;
@@ -13,15 +14,9 @@ import logic.Order;
 import logic.Restaurant;
 import ocsf.server.*;
 
-
-
-
-
-
 public class EchoServer extends AbstractServer 
 {
 	private mysqlConnection Sqlconnection=new mysqlConnection();
-	
 	private ServerPortFrameController1 controller;
 	private String ip,host;
 	
@@ -68,7 +63,7 @@ public class EchoServer extends AbstractServer
 			case searchOrder:
 				message = ((String) m.getObject()).split(" ");
 				Order orderFromDb=Sqlconnection.parseTheData(message[0]);
-				client.sendToClient(new Message1(MessageType.searchOrder,orderFromDb));
+				client.sendToClient(new Message1(MessageType.searchOrder,orderFromDb)); //server sends instances of Message1 back to the client
 				break;
 			case connect:
 				message = ((String) m.getObject()).split(" ");
@@ -104,21 +99,25 @@ public class EchoServer extends AbstractServer
 				break;
 			case createAccount:
 			    message = ((String) m.getObject()).split(" ");
-			    // Assuming the parameters come in the following order:
-			    // message[0] - firstName
-			    // message[1] - lastName
-			    // message[2] - phone
-			    // message[3] - userId
-			    // message[4] - email
-			    // message[5] - creditCard
+			    String firstName = message[0];
+			    String lastName = message[1];
+			    String phone = message[2];
+			    String userId = message[3];
+			    String email = message[4];
+			    String creditCard = message[5];
+
+			    // Get all accounts from the database
+			    ArrayList<CreateAccount> accountList = Sqlconnection.getAccountsFromDB();
+
+			    // Check if the user ID already exists
+			    boolean userExists = accountList.stream().anyMatch(account -> account.getUserId().equals(userId));
 			    
-			    // Check if the user already exists in the database
-			    boolean exists = Sqlconnection.isUserIdUnique(message[3]); // Assuming message[3] is the userId
-			    if (exists) {
+			    if (userExists) {
 			        client.sendToClient(new Message1(MessageType.createAccount, "User already exists"));
 			    } else {
-			        // If not, create the account
-			        boolean success = Sqlconnection.createAccount(message[0], message[1], message[2], message[3], message[4], message[5]); // Pass all required fields
+			        // If the user does not exist, you would need to add the account to the database
+			        // For this to work, you need to ensure that the account is inserted into the database
+			        boolean success = Sqlconnection.createAccount(firstName, lastName, phone, userId, email, creditCard);
 			        if (success) {
 			            client.sendToClient(new Message1(MessageType.createAccount, "Account created successfully"));
 			        } else {
@@ -127,17 +126,17 @@ public class EchoServer extends AbstractServer
 			    }
 			    break;
 
-			default:
-				break;
+
+             default:
+                 break;
+
 			}
 			
 			
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
-
-	 
+	}	 
   }
    
   /**

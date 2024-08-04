@@ -71,13 +71,13 @@ public class CreateAccountController {
         String firstName = Fnametxt.getText();
         String lastName = Lnametxt.getText();
         String phone = Phonetxt.getText();
-        String id = IDtxt.getText();
+        String userID = IDtxt.getText();
         String email = Emailtxt.getText();
         String creditCard = Credittxt.getText();
 
         // Check if all fields are filled
         if (firstName.trim().isEmpty() || lastName.trim().isEmpty()
-                || phone.trim().isEmpty() || id.trim().isEmpty()
+                || phone.trim().isEmpty() || userID.trim().isEmpty()
                 || email.trim().isEmpty()) {
             updateTextMessage("All fields marked with * are required. Please fill them out to proceed with account creation.");
             newAcctxt.setVisible(false); // Ensure the label is hidden if fields are empty
@@ -85,7 +85,7 @@ public class CreateAccountController {
         }
 
         // Create the account on the server in a new thread to avoid blocking UI
-        new Thread(() -> createAccountOnServer(firstName, lastName, phone, id, email, creditCard)).start();
+        new Thread(() -> createAccountOnServer(firstName, lastName, phone, userID, email, creditCard)).start();
     }
 
     private void createAccountOnServer(String firstName, String lastName, String phone, String id, String email, String creditCard) {

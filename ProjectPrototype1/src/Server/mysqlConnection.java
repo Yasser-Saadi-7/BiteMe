@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.CreateAccount;
 import logic.MealsType;
 import logic.Order;
 import logic.Restaurant;
@@ -115,48 +116,7 @@ public class mysqlConnection {
         }
         return "error";
     }
-
-    // Method to check if the user ID is unique
-    public boolean isUserIdUnique(String userId) {
-        try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM project.users WHERE UserID = ?");
-            stmt.setString(1, userId);
-            ResultSet res = stmt.executeQuery();
-            boolean isUnique = !res.next(); // If no records are found, the user ID is unique
-            res.close();
-            return isUnique;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false; // In case of an error, assume it's not unique
-        }
-    }
-
-    // Method to create a new user account
-    public boolean createAccount(String firstName, String lastName, String phone, String userId, String email, String creditCard) {
-        try {
-            // Prepare the SQL statement with the CreditCard column that can accept NULL
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO project.users (FirstName, LastName, Phone, UserID, Email, CreditCard) VALUES (?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, firstName);
-            stmt.setString(2, lastName);
-            stmt.setString(3, phone);
-            stmt.setString(4, userId);
-            stmt.setString(5, email);
-
-            // Check if creditCard is empty and set the prepared statement accordingly
-            if (creditCard.isEmpty()) {
-                stmt.setNull(6, java.sql.Types.VARCHAR); // Set CreditCard to NULL if empty
-            } else {
-                stmt.setString(6, creditCard); // Otherwise, set it to the provided value
-            }
-
-            int rowsInserted = stmt.executeUpdate();
-            stmt.close();
-            return rowsInserted > 0; // Return true if a row was inserted
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false; // Return false in case of an error
-        }
-    }
+    
 
     // To help assign a branch to each manager
     public static Connection getConnection() {
@@ -217,5 +177,62 @@ public class mysqlConnection {
             var5.printStackTrace();
         }
         return allMealsType;
+    }
+    
+ 
+    // Modify this method to return whether the account exists
+    public boolean accountExists(String userId) {
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM project.users WHERE UserID = '" + userId + "';");
+            return res.next(); // If a row exists, the user ID exists
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // User ID does not exist
+    }
+
+    // Updated getAccountsFromDB method
+    public ArrayList<CreateAccount> getAccountsFromDB() {
+        ArrayList<CreateAccount> accountList = new ArrayList<CreateAccount>();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM project.users;");
+
+            while (res.next()) {
+                String firstName = res.getString("FirstName");
+                String lastName = res.getString("LastName");
+                String phone = res.getString("Phone");
+                String userId = res.getString("UserID");
+                String email = res.getString("Email");
+                String creditCard = res.getString("CreditCard");
+
+                // Create a new CreateAccount object and add it to the list
+                CreateAccount account = new CreateAccount(firstName, lastName, phone, userId, email, creditCard);
+                accountList.add(account);
+            }
+            res.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return accountList;
+    }
+
+    public boolean createAccount(String firstName, String lastName, String phone, String userID, String email, String creditCard) {
+        String sql = "INSERT INTO project.users (FirstName, LastName, Phone, UserID, Email, CreditCard) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, firstName);
+            pstmt.setString(2, lastName);
+            pstmt.setString(3, phone);
+            pstmt.setString(4, userID);
+            pstmt.setString(5, email);
+            pstmt.setString(6, creditCard);
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0; // Return true if at least one row was inserted
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Return false if an error occurred
+        }
     }
 }
