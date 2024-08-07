@@ -56,9 +56,9 @@ public class ViewMonthlyReport {
          //Assign every manager to its OWN branch
         // Load branches for the current manager if the ID is valid
         if (currentManagerId > 0) {
-            mysqlConnection.BranchService branchService = new mysqlConnection.BranchService();
-            List<String> branches = branchService.getBranchesForManager(currentManagerId);
-            chooseBrcombo.getItems().addAll(branches);
+           // mysqlConnection.BranchService branchService = new mysqlConnection.BranchService();
+          //  List<String> branches = branchService.getBranchesForManager(currentManagerId);
+           // chooseBrcombo.getItems().addAll(branches);
         } else {
             // Handle case where no manager ID is set
             chooseBrcombo.getItems().add("No branches available");

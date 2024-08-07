@@ -1,22 +1,37 @@
+// This file contains material supporting section 3.7 of the textbook:
+// "Object Oriented Software Engineering" and is issued under the open-source
+// license found at www.lloseng.com 
 package Server;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Vector;
+
 import client.ChatClient;
-import gui.ServerPortFrameController1;
+import client.ClientController;
 import logic.ClientConnectionDetails;
 import logic.CreateAccount;
+import logic.Dish;
 import logic.MealsType;
 import logic.Message1;
 import logic.MessageType;
+import gui.ServerPortFrameController1;
 import logic.Order;
-
 import logic.Restaurant;
+import logic.Selection;
+
 import ocsf.server.*;
+
+/**
+ * This class overrides some of the methods in the abstract 
+ * superclass in order to give more functionality to the server.
+ *
+ */
 
 public class EchoServer extends AbstractServer 
 {
 	private mysqlConnection Sqlconnection=new mysqlConnection();
+	
 	private ServerPortFrameController1 controller;
 	private String ip,host;
 	
@@ -55,7 +70,7 @@ public class EchoServer extends AbstractServer
    */
   public void handleMessageFromClient  (Object msg, ConnectionToClient client)
   {
-	  Message1 m = (Message1) msg;
+	    Message1 m = (Message1) msg;
 		String message[];
 		ArrayList<Object> arr;
 		try {
@@ -63,7 +78,7 @@ public class EchoServer extends AbstractServer
 			case searchOrder:
 				message = ((String) m.getObject()).split(" ");
 				Order orderFromDb=Sqlconnection.parseTheData(message[0]);
-				client.sendToClient(new Message1(MessageType.searchOrder,orderFromDb)); //server sends instances of Message1 back to the client
+				client.sendToClient(new Message1(MessageType.searchOrder,orderFromDb));
 				break;
 			case connect:
 				message = ((String) m.getObject()).split(" ");
@@ -74,6 +89,7 @@ public class EchoServer extends AbstractServer
 				message = ((String) m.getObject()).split(" ");
 				ServerPortFrameController1.connectionData.add(new ClientConnectionDetails(message[0], message[1], message[2]));
 				client.sendToClient(new Message1(null, null));
+				break;
 			case viewOrdersList:
 				ArrayList<Order> orders = mysqlConnection.getOrdersFromDB();
 				client.sendToClient(new Message1(MessageType.viewOrdersList,orders));
@@ -97,48 +113,61 @@ public class EchoServer extends AbstractServer
 				ArrayList<MealsType> allMealsType=Sqlconnection.getMealsType(message[0]);
 				client.sendToClient(new Message1(MessageType.mealsType,allMealsType));
 				break;
+			case dishes:
+				message = ((String) m.getObject()).split(" ");
+				ArrayList<Dish> allDishes=Sqlconnection.getDishes(message[0]);
+				client.sendToClient(new Message1(MessageType.dishes,allDishes));
+				break;
+			case selections:
+				message = ((String) m.getObject()).split(" ");
+				ArrayList<Selection> allSelections=Sqlconnection.getSelections(message[0]);
+				client.sendToClient(new Message1(MessageType.selections,allSelections));
+				break;
 			case createAccount:
 			    message = ((String) m.getObject()).split(" ");
-			    String firstName = message[0];
-			    String lastName = message[1];
-			    String phone = message[2];
-			    String userId = message[3];
-			    String email = message[4];
-			    String creditCard = message[5];
 
-			    // Get all accounts from the database
-			    ArrayList<CreateAccount> accountList = Sqlconnection.getAccountsFromDB();
-
-			    // Check if the user ID already exists
-			    boolean userExists = accountList.stream().anyMatch(account -> account.getUserId().equals(userId));
-			    
-			    if (userExists) {
-			        client.sendToClient(new Message1(MessageType.createAccount, "User already exists"));
-			    } else {
-			        // If the user does not exist, you would need to add the account to the database
-			        // For this to work, you need to ensure that the account is inserted into the database
-			        boolean success = Sqlconnection.createAccount(firstName, lastName, phone, userId, email, creditCard);
-			        if (success) {
-			            client.sendToClient(new Message1(MessageType.createAccount, "Account created successfully"));
-			        } else {
-			            client.sendToClient(new Message1(MessageType.createAccount, "Failed to create account"));
-			        }
+			    // Check if we have at least 8 elements
+			    if (message.length < 8) {
+			        client.sendToClient(new Message1(MessageType.createAccount, "All fields marked with * are required. Please fill them out to proceed with account creation."));
+			        return;
 			    }
-			    break;
 
+			    // Extract parameters based on the expected format
+			    String userID = message[0]; // User ID
+			    String firstName = message[1]; // First Name
+			    String lastName = message[2]; // Last Name
+			    String email = message[3]; // Email
+			    String phone = message[4]; // Phone
+			    String creditCard = message[5]; // Credit Card
+			  //userType = "Client"
+			    String username = message[7]; // Username
+			    String password = message[8]; // Password
 
-             default:
-                 break;
+			   
+		        
+				// Check if the user ID already exists
+				ArrayList<CreateAccount> accountList = Sqlconnection.getAccountsFromDB(userID);
+				boolean userExists = accountList.stream().anyMatch(account -> account.getUserID().equals(userID));
 
+				if (userExists) {
+				    client.sendToClient(new Message1(MessageType.createAccount, "User already exists"));
+				} else {
+				    boolean success = Sqlconnection.createAccount(userID, firstName, lastName, email, phone, creditCard, "Client" ,username,password); 
+				    if (success) {
+
+				        client.sendToClient(new Message1(MessageType.createAccount, "Account created successfully"));
+				    } else {
+				        client.sendToClient(new Message1(MessageType.createAccount, "Failed to create account, Try again!"));
+				    }
+				}
+
+			default:
+				break;
 			}
-			
-			
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}	 
-  }
-   
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
   /**
    * This method overrides the one in the superclass.  Called
    * when the server starts listening for connections.
@@ -150,18 +179,18 @@ public class EchoServer extends AbstractServer
   }
   
  
-  @Override
-	protected void clientConnected(ConnectionToClient client) 
-	{
-	    ip=client.getInetAddress().getHostAddress();
-	    host=client.getInetAddress().getHostName();
-		String ipAddress = client.getInetAddress().getHostAddress();
-		String hostName = client.getInetAddress().getHostName();
-		ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Connected");
-		System.out.println("Client connected: " + client);
-		System.out.println("IP: " + ipAddress);
-		System.out.println("Host: " + hostName);
-	}
+  //@Override
+	//protected void clientConnected(ConnectionToClient client) 
+	//{
+	    //ip=client.getInetAddress().getHostAddress();
+	    //host=client.getInetAddress().getHostName();
+		//String ipAddress = client.getInetAddress().getHostAddress();
+		//String hostName = client.getInetAddress().getHostName();
+		//ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Connected");
+		//System.out.println("Client connected: " + client);
+		//System.out.println("IP: " + ipAddress);
+		//System.out.println("Host: " + hostName);
+	//}
   
 	
 	//@Override
@@ -173,31 +202,39 @@ public class EchoServer extends AbstractServer
 		//ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Disconnected");
 		//System.out.println("Client disconnected: " + client);
 	//}
-	@Override
-	synchronized protected void clientDisconnected(
-		    ConnectionToClient client) {
-		System.out.println("yoyo");
-		if (ServerUI.aFrame != null) {
-			System.out.println("yoyo");
+	//@Override
+	//synchronized protected void clientDisconnected(
+		    //ConnectionToClient client) {
+		//System.out.println("yoyo");
+		//if (ServerUI.aFrame != null) {
+			//System.out.println("yoyo");
 			//String ipAddress = client.getInetAddress().getHostAddress();
 			//String hostName = client.getInetAddress().getHostName();
-			ServerUI.aFrame.addClientConnection(client.getInetAddress().getHostAddress(), client.getInetAddress().getHostName(), "Disconnected");
-			System.out.println("Client disconnected: " + client);
+			//ServerUI.aFrame.addClientConnection(client.getInetAddress().getHostAddress(), client.getInetAddress().getHostName(), "Disconnected");
 			//System.out.println("Client disconnected: " + client);
-		}
+			//System.out.println("Client disconnected: " + client);
+		//}
 		
-	}
+	//}
+	
+	//@Override
+	//synchronized protected void clientException(ConnectionToClient client, Throwable exception) 
+	//{
+		//ServerPortFrameController1 aa;
+		//aa=ServerUI.aFrame;
+		//if(aa==null)
+		//{
+			//System.out.println("null");
+		//}
+		//String ipAddress = client.getInetAddress().getHostAddress();
+		//String hostName = client.getInetAddress().getHostName();
+		 //ServerUI.aFrame.addClientConnection(ip,host, "Disconnected");
+		//aa.addClientConnection(ip, host, "Disconnected");
+		//System.out.println("Client disconnected: " + client);
+		//System.out.println("Client disconnected: " + client);
+	//}
 	
 	
 	
-
-    @Override
-    synchronized protected void clientException(ConnectionToClient client, Throwable exception) {
-        String ipAddress = client.getInetAddress().getHostAddress();
-        String hostName = client.getInetAddress().getHostName();
-        ServerUI.aFrame.addClientConnection(ipAddress, hostName, "Disconnected");
-        System.out.println("Exception occurred for client: " + client);
-    }
-
 }
-// End of EchoServer class
+//End of EchoServer class

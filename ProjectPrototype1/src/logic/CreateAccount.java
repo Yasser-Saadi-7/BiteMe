@@ -1,24 +1,41 @@
 package logic;
 
-public class CreateAccount {
+import java.io.Serializable;
+
+public class CreateAccount implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
+
+    private String userID;
     private String firstName;
     private String lastName;
-    private String phone;
-    private String userId;
     private String email;
+    private String phone;
     private String creditCard;
+    private String userType;
+    private String username;
+    private String password;
 
     // Constructor
-    public CreateAccount(String firstName, String lastName, String phone, String userId, String email, String creditCard) {
+    public CreateAccount(String userID, String firstName, String lastName, String email, String phone,
+                         String creditCard, String userType, String username, String password) {
+        this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phone;
-        this.userId = userId;
         this.email = email;
+        this.phone = phone; 
         this.creditCard = creditCard;
+        this.userType = userType; 
+        this.username = username;
+        this.password = password;
+        
     }
 
     // Getters
+    public String getUserID() {
+        return userID;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -31,10 +48,6 @@ public class CreateAccount {
         return phone;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -43,16 +56,52 @@ public class CreateAccount {
         return creditCard;
     }
 
-    // Optionally, you can override toString() for easier debugging
-    @Override
-    public String toString() {
-        return "CreateAccount{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", userId='" + userId + '\'' +
-                ", email='" + email + '\'' +
-                ", creditCard='" + creditCard + '\'' +
-                '}';
+    public String getUserType() {
+        return userType;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    // Setters
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

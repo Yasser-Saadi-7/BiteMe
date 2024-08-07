@@ -13,27 +13,27 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="96.0" text="* First Name:" textFill="WHITE">
+      <Label layoutX="40.0" layoutY="125.0" text="* First Name:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="177.0" text="* Phone:" textFill="WHITE">
+      <Label layoutX="71.0" layoutY="204.0" text="* Phone:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="43.0" layoutY="150.0" text="* ID:" textFill="WHITE">
+      <Label layoutX="86.0" layoutY="96.0" text="* ID:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="43.0" layoutY="123.0" text="* Last Name:" textFill="WHITE">
+      <Label layoutX="41.0" layoutY="150.0" text="* Last Name:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="204.0" text="* E-mail:" textFill="WHITE">
+      <Label layoutX="71.0" layoutY="177.0" text="* E-mail:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
@@ -43,28 +43,36 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="createBtn" layoutX="138.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleCreateButton" prefHeight="45.0" prefWidth="151.0" text="Create">
+      <Button fx:id="createBtn" layoutX="152.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleCreateButton" prefHeight="45.0" prefWidth="151.0" text="Create">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="txtmessage" layoutX="40.0" layoutY="272.0" text="Please Fill All Fields" textFill="WHITE">
+      <Label fx:id="txtmessage" layoutX="40.0" layoutY="272.0" text="Please Fill All Required Fields" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="Fnametxt" layoutX="151.0" layoutY="97.0" />
-      <TextField fx:id="Lnametxt" layoutX="151.0" layoutY="124.0" />
-      <TextField fx:id="IDtxt" layoutX="151.0" layoutY="151.0" />
-      <TextField fx:id="Phonetxt" layoutX="151.0" layoutY="178.0" />
-      <TextField fx:id="Emailtxt" layoutX="151.0" layoutY="206.0" />
-      <TextField fx:id="Credittxt" layoutX="151.0" layoutY="233.0" />
+      <TextField fx:id="Fnametxt" layoutX="151.0" layoutY="124.0" onAction="#createAccount" />
+      <TextField fx:id="Lnametxt" layoutX="151.0" layoutY="149.0" onAction="#createAccount" />
+      <TextField fx:id="IDtxt" layoutX="151.0" layoutY="95.0" onAction="#createAccount" />
+      <TextField fx:id="Phonetxt" layoutX="151.0" layoutY="203.0" onAction="#createAccount" />
+      <TextField fx:id="Emailtxt" layoutX="151.0" layoutY="176.0" onAction="#createAccount" />
+      <TextField fx:id="Credittxt" layoutX="151.0" layoutY="233.0" onAction="#createAccount" />
       <Button fx:id="btnclose" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="31.0" prefWidth="64.0" text="BACK" />
-      <Button fx:id="clrFields" layoutX="174.0" layoutY="362.0" mnemonicParsing="false" onAction="#handleClearFieldsButton" prefHeight="31.0" prefWidth="80.0" text="Clear Fields" />
-      <Label fx:id="newAcctxt" layoutX="300.0" layoutY="317.0" prefHeight="31.0" prefWidth="306.0" text="Success: New Account has been created." textFill="WHITE">
+      <Button fx:id="clrFields" layoutX="179.0" layoutY="362.0" mnemonicParsing="false" onAction="#handleClearFieldsButton" prefHeight="31.0" prefWidth="99.0" text="Clear Fields">
          <font>
-            <Font size="18.0" />
+            <Font size="13.0" />
+         </font></Button>
+      <Label fx:id="newAcctxt" layoutX="320.0" layoutY="362.0" prefHeight="31.0" prefWidth="306.0" text="Username and password are the same as the user ID." textFill="WHITE">
+         <font>
+            <Font size="13.0" />
          </font>
       </Label>
+      <TextField fx:id="passTxt" layoutX="380.0" layoutY="166.0" onAction="#createAccount" />
+      <TextField fx:id="usernameTxt" layoutX="380.0" layoutY="122.0" onAction="#createAccount" />
+      <Label layoutX="323.0" layoutY="170.0" text="* password:" />
+      <Label layoutX="321.0" layoutY="128.0" text="* username:" />
+      
    </children>
 </Pane>
