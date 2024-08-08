@@ -12,13 +12,13 @@ public class CreateAccount implements Serializable {
     private String email;
     private String phone;
     private String creditCard;
-    private String userType;
+    private UserType userType;
     private String username;
     private String password;
 
     // Constructor
     public CreateAccount(String userID, String firstName, String lastName, String email, String phone,
-                         String creditCard, String userType, String username, String password) {
+                         String creditCard, UserType userType, String username, String password) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -56,7 +56,7 @@ public class CreateAccount implements Serializable {
         return creditCard;
     }
 
-    public String getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
@@ -93,7 +93,7 @@ public class CreateAccount implements Serializable {
         this.creditCard = creditCard;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(UserType userType) {
         this.userType = userType;
     }
 

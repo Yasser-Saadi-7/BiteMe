@@ -19,7 +19,7 @@ import gui.ServerPortFrameController1;
 import logic.Order;
 import logic.Restaurant;
 import logic.Selection;
-
+import logic.UserType;
 import ocsf.server.*;
 
 /**
@@ -139,27 +139,30 @@ public class EchoServer extends AbstractServer
 			    String email = message[3]; // Email
 			    String phone = message[4]; // Phone
 			    String creditCard = message[5]; // Credit Card
-			  //userType = "Client"
-			    String username = message[7]; // Username
-			    String password = message[8]; // Password
+			    String username = message[6]; // Username
+			    String password = message[7]; // Password
+			    
+			    
+			 // Determine user type (you can add a mechanism to get this from the client if needed)
+			    UserType userType1 = UserType.CLIENT; // Default to CLIENT or determine based on additional input
 
-			   
-		        
-				// Check if the user ID already exists
-				ArrayList<CreateAccount> accountList = Sqlconnection.getAccountsFromDB(userID);
-				boolean userExists = accountList.stream().anyMatch(account -> account.getUserID().equals(userID));
 
-				if (userExists) {
-				    client.sendToClient(new Message1(MessageType.createAccount, "User already exists"));
-				} else {
-				    boolean success = Sqlconnection.createAccount(userID, firstName, lastName, email, phone, creditCard, "Client" ,username,password); 
-				    if (success) {
+			    // Check if the user ID already exists
+			    ArrayList<CreateAccount> accountList = Sqlconnection.getAccountsFromDB(userID);
+			    boolean userExists = accountList.stream().anyMatch(account -> account.getUserID().equals(userID));
 
-				        client.sendToClient(new Message1(MessageType.createAccount, "Account created successfully"));
-				    } else {
-				        client.sendToClient(new Message1(MessageType.createAccount, "Failed to create account, Try again!"));
-				    }
-				}
+			    if (userExists) {
+			        client.sendToClient(new Message1(MessageType.createAccount, "User already exists"));
+			    } else {
+			        boolean success = Sqlconnection.createAccount(userID, firstName, lastName, email, phone, creditCard, UserType.CLIENT, username, password); 
+			        if (success) {
+			            client.sendToClient(new Message1(MessageType.createAccount, "Account created successfully"));
+			        } else {
+			            client.sendToClient(new Message1(MessageType.createAccount, "Failed to create account, Try again!"));
+			        }
+			    }
+			    break; // Add this break statement to ensure flow control is correct
+
 
 			default:
 				break;

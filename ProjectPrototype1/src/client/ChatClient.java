@@ -73,13 +73,15 @@ public class ChatClient extends AbstractClient {
             case selections:
                 selectionsList = (ArrayList<Selection>) m.getObject();
                 break;
+                
             case createAccount: 
-            	
-            	accountList = (ArrayList<CreateAccount>) m.getObject();
                 // Store the server response for account creation
                 CheckUserIdResponse = (String) m.getObject();
+                System.out.println("Server response: " + CheckUserIdResponse); // DEBUG
+                awaitResponse = false; // Signal that the response has been received
                 clientUI.display(CheckUserIdResponse); // Display the response to the user
                 break;
+                
             default:
                 break;
         }
