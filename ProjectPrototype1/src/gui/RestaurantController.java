@@ -81,7 +81,7 @@ public class RestaurantController implements Initializable{
 	void showMenu(ActionEvent event) {
 		if(resTable.getSelectionModel().getSelectedItem()!=null) {
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();// get stage
-			MealsTypeController AFrame=new MealsTypeController();
+			MealTypeController AFrame=new MealTypeController();
 			try {
 				AFrame.start(stage);
 			} catch (Exception e) {

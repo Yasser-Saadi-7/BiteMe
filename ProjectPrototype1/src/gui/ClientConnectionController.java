@@ -16,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import logic.Message1;
+import logic.MessageType;
 
 public class ClientConnectionController implements Initializable {
    @FXML
@@ -32,18 +34,22 @@ public class ClientConnectionController implements Initializable {
 		e.printStackTrace();
 	}
       Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+   
+      //ClientPageController aFrame =new ClientPageController();
       
-      
-      LogInController logInController = new LogInController();
-      //BranchManagerController BranchMangerController = new BranchManagerController();
-      
+      BranchManagerController aFrame =new BranchManagerController();
+      BranchManagerController BranchMangerController = new BranchManagerController();
+     // LogInController logInController = new LogInController();
       try {
-    	logInController.start(stage);
-    	//BranchMangerController.start(stage);
+      	BranchMangerController.start(stage);
+    	//logInController.start(stage);
+    	 aFrame.start(stage);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+
+      
 
    }
 

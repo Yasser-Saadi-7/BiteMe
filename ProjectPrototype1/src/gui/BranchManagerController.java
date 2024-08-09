@@ -43,7 +43,7 @@ public class BranchManagerController {
     @FXML
     private void handleViewMonthlyReportButton(ActionEvent event) {
         Stage currentStage = (Stage) btnViewMR.getScene().getWindow(); // Get current stage
-        openFXML("ViewMonthlyReport.fxml", "View Monthly Report", currentStage); // Pass the current stage
+        openFXML("ViewMonthlyReports.fxml", "View Monthly Report", currentStage); // Pass the current stage
     }
 
     // Method to handle Close button click

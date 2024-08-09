@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DishesController">
+   <children>
+      <Label layoutX="265.0" layoutY="14.0" text="Dishes">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="22.0" layoutY="19.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+      <Button layoutX="25.0" layoutY="342.0" mnemonicParsing="false" onAction="#home" text="Home" />
+      <Button layoutX="29.0" layoutY="310.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button layoutX="274.0" layoutY="342.0" mnemonicParsing="false" onAction="#next" text="Next" />
+      <TableView fx:id="dishesTable" layoutX="106.0" layoutY="86.0" prefHeight="200.0" prefWidth="403.0">
+        <columns>
+          <TableColumn fx:id="dishNameCol" prefWidth="253.60003662109375" text="Dish Name" />
+          <TableColumn fx:id="priceCol" minWidth="0.0" prefWidth="149.5999755859375" text="Price" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>

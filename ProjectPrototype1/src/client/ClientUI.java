@@ -1,5 +1,7 @@
 package client;
 
+//yasser 
+
 import logic.Order;
 
 
@@ -17,6 +19,7 @@ public class ClientUI extends Application {
 
 	public static void main( String args[] ) throws Exception
 	   {
+	
 		    //host=args[0];
 		    launch(args);  
 	   } // end main
@@ -25,9 +28,8 @@ public class ClientUI extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		 //chat= new ClientController(host, 5555);
 		// TODO Auto-generated method stub
-						  		
 		ClientConnectionController aFrame = new ClientConnectionController(); // create StudentFrame
-		 aFrame.start(primaryStage);
+		aFrame.start(primaryStage);
 	}
 	
 	

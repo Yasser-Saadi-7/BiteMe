@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OrderInformationFormController1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OrderInformationFormController1">
    <children>
-      <Label layoutX="108.0" layoutY="1.0" text="Order Informations" textAlignment="CENTER">
+      <Label layoutX="106.0" layoutY="23.0" text="Order Informations" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
@@ -16,14 +16,22 @@
       <Label layoutX="36.0" layoutY="78.0" text="Restaurant: " />
       <Label layoutX="36.0" layoutY="120.0" text="Order Number: " />
       <Label layoutX="36.0" layoutY="161.0" text="Total Price: " />
-      <Label layoutX="35.0" layoutY="204.0" text="Order List Number:" />
-      <Label layoutX="38.0" layoutY="248.0" text="Order Address:" />
-      <TextField fx:id="txtrestaurant" layoutX="176.0" layoutY="74.0" />
-      <TextField fx:id="txtordernumber" layoutX="176.0" layoutY="116.0" />
-      <TextField fx:id="txttotalprice" layoutX="176.0" layoutY="157.0" />
-      <TextField fx:id="txtorderlistnumber" layoutX="176.0" layoutY="200.0" />
-      <TextField fx:id="txtorderaddress" layoutX="176.0" layoutY="253.0" />
-      <Button layoutX="251.0" layoutY="335.0" mnemonicParsing="false" onAction="#closePage" text="Close" />
-      <Button layoutX="71.0" layoutY="335.0" mnemonicParsing="false" onAction="#updateOrder" text="Update" />
+      <Label layoutX="38.0" layoutY="204.0" text="Order Address:" />
+      <Label layoutX="36.0" layoutY="288.0" text="User ID:" /> <!-- Added for user ID -->
+      <Label layoutX="36.0" layoutY="320.0" text="Delivery Type ID:" /> <!-- Added for delivery type ID -->
+      <Label layoutX="36.0" layoutY="352.0" text="Expected Delivery Time:" /> <!-- Added for expected delivery time -->
+      <Label layoutX="36.0" layoutY="384.0" text="Actual Delivery Time:" /> <!-- Added for actual delivery time -->
+      
+      <TextField fx:id="txtRestaurant" layoutX="176.0" layoutY="74.0" />
+      <TextField fx:id="txtOrderId" layoutX="176.0" layoutY="116.0" />
+      <TextField fx:id="txtTotalPrice" layoutX="176.0" layoutY="157.0" />
+      <TextField fx:id="txtOrderAddress" layoutX="176.0" layoutY="200.0" />
+      <TextField fx:id="txtUserID" layoutX="176.0" layoutY="288.0" /> <!-- Added for user ID -->
+      <TextField fx:id="txtDeliveryTypeId" layoutX="176.0" layoutY="320.0" /> <!-- Added for delivery type ID -->
+      <TextField fx:id="txtExpectedDeliveryTime" layoutX="176.0" layoutY="352.0" /> <!-- Added for expected delivery time -->
+      <TextField fx:id="txtActualDeliveryTime" layoutX="176.0" layoutY="384.0" /> <!-- Added for actual delivery time -->
+      
+      <Button layoutX="251.0" layoutY="420.0" mnemonicParsing="false" onAction="#closePage" text="Close" />
+      <Button layoutX="71.0" layoutY="420.0" mnemonicParsing="false" onAction="#updateOrder" text="Update" />
    </children>
 </Pane>

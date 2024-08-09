@@ -58,17 +58,18 @@ public class ClientController implements ChatIF
 			System.out.println("Error: Can't setup connection!" + " Terminating client.");
 			System.exit(1);
 		}
-//	  try 
-//	    {
-//		  client = new ChatClient(host, port, this);
-//		  this.accept("a");
-//	    } 
-//	    catch(IOException exception) 
-//	    {
-//	      System.out.println("Error: Can't setup connection!"
-//	                + " Terminating client.");
-//	      System.exit(1);
-//	    }
+	 // try 
+	   // {
+		  //client = new ChatClient(host, port, this);
+		  //this.accept(new Message1(MessageType.connect," "));
+		  //this.accept("a");
+	    //} 
+	    //catch(IOException exception) 
+	    //{
+	      //System.out.println("Error: Can't setup connection!"
+	        //        + " Terminating client.");
+	      //System.exit(1);
+	    //}
 	  
     
       //client= new ChatClient(host, port, this);

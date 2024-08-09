@@ -38,7 +38,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="40.0" layoutY="234.0" text="Credit Card:" textFill="WHITE">
+      <Label layoutX="58.0" layoutY="234.0" text="Credit Card:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
@@ -64,11 +64,6 @@
          <font>
             <Font size="13.0" />
          </font></Button>
-      <Label fx:id="newAcctxt" layoutX="320.0" layoutY="362.0" prefHeight="31.0" prefWidth="306.0" text="Username and password are the same as the user ID." textFill="WHITE">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
       <TextField fx:id="passTxt" layoutX="380.0" layoutY="166.0" onAction="#createAccount" />
       <TextField fx:id="usernameTxt" layoutX="380.0" layoutY="122.0" onAction="#createAccount" />
       <Label layoutX="323.0" layoutY="170.0" text="* password:" />

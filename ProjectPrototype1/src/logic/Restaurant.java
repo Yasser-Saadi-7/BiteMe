@@ -2,51 +2,52 @@ package logic;
 
 import java.io.Serializable;
 
-public class Restaurant implements Serializable{
-	private static final long serialVersionUID = 1L;
-	
-	private String resName,resLocation,branchId,resPhoneNum;
+public class Restaurant implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-	public Restaurant(String resName, String resLocation, String branchId, String resPhoneNum) {
-		super();
-		this.resName = resName;
-		this.resLocation = resLocation;
-		this.branchId = branchId;
-		this.resPhoneNum = resPhoneNum;
-	}
+    private int restaurantId; // Matches SQL restaurantId
+    private int branchId; // Matches SQL branchId
+    private String restaurantName; // Matches SQL restaurantName
 
-	public String getResName() {
-		return resName;
-	}
+    // Constructor to initialize all fields
+    public Restaurant(int restaurantId, int branchId, String restaurantName) {
+        this.restaurantId = restaurantId; // Initialize restaurantId
+        this.branchId = branchId; // Initialize branchId
+        this.restaurantName = restaurantName; // Initialize restaurantName
+    }
 
-	public void setResName(String resName) {
-		this.resName = resName;
-	}
+    // Getters and setters
+    public int getRestaurantId() {
+        return restaurantId;
+    }
 
-	public String getResLocation() {
-		return resLocation;
-	}
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
 
-	public void setResLocation(String resLocation) {
-		this.resLocation = resLocation;
-	}
+    public int getBranchId() {
+        return branchId;
+    }
 
-	public String getBranchId() {
-		return branchId;
-	}
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
+    }
 
-	public void setBranchId(String branchId) {
-		this.branchId = branchId;
-	}
+    public String getRestaurantName() {
+        return restaurantName;
+    }
 
-	public String getResPhoneNum() {
-		return resPhoneNum;
-	}
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
 
-	public void setResPhoneNum(String resPhoneNum) {
-		this.resPhoneNum = resPhoneNum;
-	}
-	
-	
-
+    // Optional: Override toString() for better debugging/printing
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "restaurantId=" + restaurantId +
+                ", branchId=" + branchId +
+                ", restaurantName='" + restaurantName + '\'' +
+                '}';
+    }
 }

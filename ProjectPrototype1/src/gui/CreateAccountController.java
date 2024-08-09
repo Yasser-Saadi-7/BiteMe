@@ -80,7 +80,7 @@ public class CreateAccountController {
 			waitForResponse(); // Custom method to wait for server response
 
 			// After the response is received, update the message
-			String createAccountResponse = ChatClient.CheckUserIdResponse;
+			String createAccountResponse = ChatClient.checkUserIdResponse;
 
 			// Update the UI based on the response
 			updateResponseMessage(createAccountResponse);

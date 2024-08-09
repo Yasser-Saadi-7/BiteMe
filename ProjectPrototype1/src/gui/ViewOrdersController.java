@@ -17,6 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import logic.Message1;
+import logic.MessageType;
 import logic.Order;
 
 public class ViewOrdersController implements Initializable {
@@ -54,7 +56,8 @@ public class ViewOrdersController implements Initializable {
 	  this.listnumber.setCellValueFactory(new PropertyValueFactory<>("listNumber"));
 	  this.address.setCellValueFactory(new PropertyValueFactory<>("orderAddress"));
 	  this.totalprice.setCellValueFactory(new PropertyValueFactory<>("tprice"));
-      ClientUI.chat.accept("view");
+      //ClientUI.chat.accept("view");
+	  ClientUI.chat.accept(new Message1(MessageType.viewOrdersList,"view"));
       this.orders = FXCollections.observableArrayList(ChatClient.list);
       this.Orders_tbl.setItems(this.orders);
    }

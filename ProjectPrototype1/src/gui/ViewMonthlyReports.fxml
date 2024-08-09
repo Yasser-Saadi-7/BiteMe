@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="button" stylesheets="@ViewOrder.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewMonthlyReport">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="button" stylesheets="@ViewOrder.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewMonthlyReportController">
    <children>
       <Label layoutX="160.0" layoutY="30.0" text="Monthly Reports" textFill="#1c4271" underline="true">
          <font>
@@ -23,8 +23,8 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ComboBox fx:id="chooseMocombo" layoutX="261.0" layoutY="123.0" onAction="#initialize" prefWidth="150.0" promptText="Home Branch" />
-      <ComboBox fx:id="chooseBrcombo" layoutX="261.0" layoutY="169.0" onAction="#initialize" prefWidth="150.0" />
+      <ComboBox fx:id="chooseBrcombo" layoutX="261.0" layoutY="123.0" onAction="#initialize" prefWidth="150.0" promptText="Select Branch" />
+      <ComboBox fx:id="chooseMocombo" layoutX="261.0" layoutY="169.0" onAction="#initialize" prefWidth="150.0" promptText="Select Month" />
       <Button fx:id="viewInRepobtn" layoutX="221.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleViewIncomeReportButton" prefHeight="35.0" prefWidth="158.0" text="View income report">
          <font>
             <Font size="14.0" />
@@ -40,6 +40,12 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnclose1" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="29.0" prefWidth="79.0" text="BACK" />
+      <Button fx:id="btnclose" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="29.0" prefWidth="79.0" text="BACK" />
+      <Label layoutX="98.0" layoutY="211.0" text="Choose year:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="chooseYrcombo" layoutX="261.0" layoutY="214.0" onAction="#initialize" prefWidth="150.0" promptText="Select Year" />
    </children>
 </Pane>
