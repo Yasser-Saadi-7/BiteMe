@@ -15,101 +15,127 @@ import logic.MessageType;
 import logic.Order;
 
 public class OrderInformationFormController1 implements Initializable {
-    private Order o;
+	private Order o;
 
-    @FXML
-    private TextField txtRestaurant; // Updated variable naming to follow Java conventions
-    @FXML
-    private TextField txtOrderId; // Updated to reflect new field
-    @FXML
-    private TextField txtTotalPrice; // Updated to reflect new field
-    @FXML
-    private TextField txtOrderAddress; // Updated to reflect new field
-    @FXML
-    private TextField txtUserID; // Added for user ID
-    @FXML
-    private TextField txtDeliveryTypeId; // Added for delivery type ID
-    @FXML
-    private TextField txtExpectedDeliveryTime; // Added for expected delivery time
-    @FXML
-    private TextField txtActualDeliveryTime; // Added for actual delivery time
+	@FXML
+	private TextField txtrestaurant; // Restaurant name or ID
+	@FXML
+	private TextField txtordernumber; // Order number
+	@FXML
+	private TextField txttotalprice; // Total price
+	@FXML
+	private TextField txtorderlistnumber; // Order list number (if applicable)
+	@FXML
+	private TextField txtorderaddress; // Delivery address
 
-    private String getRes() {
-        return txtRestaurant.getText();
-    }
+	/**
+	 * Retrieves the restaurant name or ID from the text field.
+	 *
+	 * @return the restaurant name or ID as a String
+	 */
+	private String getRes() {
+		return txtrestaurant.getText();
+	}
 
-    private int getOrderId() {
-        return Integer.parseInt(txtOrderId.getText()); // Updated to return int
-    }
+	/**
+	 * Retrieves the order number from the text field.
+	 *
+	 * @return the order number as a String
+	 */
+	private String getOrderNum() {
+		return txtordernumber.getText();
+	}
 
-    private double getTotalPrice() {
-        return Double.parseDouble(txtTotalPrice.getText()); // Updated to return double
-    }
+	/**
+	 * Retrieves the total price from the text field.
+	 *
+	 * @return the total price as a String
+	 */
+	private String getTotalP() {
+		return txttotalprice.getText();
+	}
 
-    private String getAddress() {
-        return txtOrderAddress.getText();
-    }
+	/**
+	 * Retrieves the order list number from the text field.
+	 *
+	 * @return the order list number as a String
+	 */
+	private String getListNum() {
+		return txtorderlistnumber.getText();
+	}
 
-    private String getUserId() {
-        return txtUserID.getText(); // Added to get user ID
-    }
+	/**
+	 * Retrieves the delivery address from the text field.
+	 *
+	 * @return the delivery address as a String
+	 */
+	private String getAddress() {
+		return txtorderaddress.getText();
+	}
 
-    private int getDeliveryTypeId() {
-        return Integer.parseInt(txtDeliveryTypeId.getText()); // Added to return int for delivery type ID
-    }
+	/**
+	 * Loads the specified order into the form fields.
+	 *
+	 * @param o1 the Order object to load
+	 */
+	public void loadOrder(Order o1) {
+		this.o = o1;
+		// Use appropriate getters to fetch values from Order object
+		this.txtrestaurant.setText(String.valueOf(o.getRestaurantId())); // Assuming it's the ID
+		this.txtordernumber.setText(String.valueOf(o.getOrderId())); // Correct method
+		this.txttotalprice.setText(String.valueOf(o.getTotalPrice())); // Correct method
+		this.txtorderlistnumber.setText(o.getListNumber()); // Update to get the list number correctly
+		this.txtorderaddress.setText(o.getOrderAddress());
+	}
 
-    private String getExpectedDeliveryTime() {
-        return txtExpectedDeliveryTime.getText(); // Changed to return String
-    }
+	/**
+	 * Closes the current page and opens the Order Track Frame.
+	 *
+	 * @param event the ActionEvent triggered by the user
+	 * @throws Exception if there is an error in closing the page or opening a new
+	 *                   stage
+	 */
+	public void closePage(ActionEvent event) throws Exception {
+		((Node) event.getSource()).getScene().getWindow().hide(); // Hiding primary window
+		OrderTrackFrameController1 orderTrackFrameController = new OrderTrackFrameController1();
+		Stage primaryStage = new Stage();
+		orderTrackFrameController.start(primaryStage);
+	}
 
-    private String getActualDeliveryTime() {
-        return txtActualDeliveryTime.getText(); // Changed to return String
-    }
+	/**
+	 * Updates the order based on the values entered in the form fields.
+	 *
+	 * @param event the ActionEvent triggered by the user
+	 * @throws Exception if there is an error during the update process
+	 */
+	public void updateOrder(ActionEvent event) throws Exception {
+		String res = txtrestaurant.getText();
+		int orderNum = Integer.parseInt(txtordernumber.getText());
+		double price = Double.parseDouble(txttotalprice.getText());
+		String listNum = txtorderlistnumber.getText();
+		String address = txtorderaddress.getText();
 
-    public void loadOrder(Order o1) {
-        this.o = o1;
-        this.txtRestaurant.setText(String.valueOf(o.getRestaurantId())); // Display restaurant ID
-        this.txtOrderId.setText(String.valueOf(o.getOrderId()));
-        this.txtTotalPrice.setText(String.valueOf(o.getTotalPrice()));
-        this.txtOrderAddress.setText(o.getOrderAddress());
-        this.txtUserID.setText(o.getUserID()); // Set user ID
-        this.txtDeliveryTypeId.setText(String.valueOf(o.getDeliveryTypeId())); // Set delivery type ID
-        this.txtExpectedDeliveryTime.setText(o.getExpectedDeliveryTime()); // Set expected delivery time
-        this.txtActualDeliveryTime.setText(o.getActualDeliveryTime()); // Set actual delivery time
-    }
+		// Assuming restaurant ID is entered in the text field
+		int restaurantId = Integer.parseInt(res);
+		int branchId = 0; // Update this as per your application logic
+		int deliveryTypeId = 0; // Update this as per your application logic
 
-    public void closePage(ActionEvent event) throws Exception {
-        ((Node) event.getSource()).getScene().getWindow().hide(); // Hiding primary window
-        OrderTrackFrameController1 orderTrackFrameController = new OrderTrackFrameController1();
-        Stage primaryStage = new Stage();
-        orderTrackFrameController.start(primaryStage);
-    }
+		// Create a new Order object
+		Order newOrder = new Order(orderNum, null, restaurantId, price, address, null, deliveryTypeId, null, null,
+				listNum, branchId, String.valueOf(orderNum));
 
-    public void updateOrder(ActionEvent event) throws Exception {
-        String res = getRes();
-        int orderId = getOrderId(); // Get order ID
-        double totalPrice = getTotalPrice(); // Get total price
-        String address = getAddress(); // Get order address
-        String userId = getUserId(); // Get user ID
-        int deliveryTypeId = getDeliveryTypeId(); // Get delivery type ID
-        String expectedDeliveryTime = getExpectedDeliveryTime(); // Get expected delivery time
-        String actualDeliveryTime = getActualDeliveryTime(); // Get actual delivery time
+		// Send the order object to the server
+		try {
+			ClientUI.chat.accept(new Message1(MessageType.updateOrder, newOrder));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-        // Create a new Order object
-        Order newOrder = new Order(orderId, userId, Integer.parseInt(res), totalPrice, address, 
-                                    null, // Set orderDate as null or the appropriate value
-                                    deliveryTypeId, expectedDeliveryTime, actualDeliveryTime); // Updated constructor call
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
+	}
 
-        // Send the order object to the server
-        try {
-            ClientUI.chat.accept(new Message1(MessageType.updateOrder, newOrder));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {	
-        // Initialize any required data here
-    }
 }

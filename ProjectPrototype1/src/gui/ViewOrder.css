@@ -5,7 +5,6 @@
 	-fx-font-weight:bold;
 	-fx-font-family:"Arial Narrow";
 }
-
 .root{
 	-fx-background-image:url("/gui/Clientbackground.jpg");
 }

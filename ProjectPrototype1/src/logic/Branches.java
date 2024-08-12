@@ -1,46 +1,88 @@
 package logic;
 
+/**
+ * Represents a branch with a unique identifier, name, and location.
+ */
 public class Branches {
     // Instance variables
     private int branchId;       // Unique identifier for the branch
     private String branchName;   // Name of the branch
     private String location;      // Location of the branch
 
-    // Constructor
+    /**
+     * Constructor to create a new Branch instance.
+     *
+     * @param branchId   the unique identifier for the branch
+     * @param branchName the name of the branch
+     * @param location   the location of the branch
+     */
     public Branches(int branchId, String branchName, String location) {
-        this.branchId = branchId;
-        this.branchName = branchName;
-        this.location = location;
+        this.branchId = branchId; // Initialize branchId
+        this.branchName = branchName; // Initialize branchName
+        this.location = location; // Initialize location
     }
 
-    // Getters and Setters
+    /**
+     * Gets the unique identifier for the branch.
+     *
+     * @return the branchId
+     */
     public int getBranchId() {
-        return branchId;
+        return branchId; // Return branchId
     }
 
+    /**
+     * Sets the unique identifier for the branch.
+     *
+     * @param branchId the new unique identifier for the branch
+     */
     public void setBranchId(int branchId) {
-        this.branchId = branchId;
+        this.branchId = branchId; // Set branchId
     }
 
+    /**
+     * Gets the name of the branch.
+     *
+     * @return the branchName
+     */
     public String getBranchName() {
-        return branchName;
+        return branchName; // Return branchName
     }
 
+    /**
+     * Sets the name of the branch.
+     *
+     * @param branchName the new name for the branch
+     */
     public void setBranchName(String branchName) {
-        this.branchName = branchName;
+        this.branchName = branchName; // Set branchName
     }
 
+    /**
+     * Gets the location of the branch.
+     *
+     * @return the location
+     */
     public String getLocation() {
-        return location;
+        return location; // Return location
     }
 
+    /**
+     * Sets the location of the branch.
+     *
+     * @param location the new location for the branch
+     */
     public void setLocation(String location) {
-        this.location = location;
+        this.location = location; // Set location
     }
 
-    // toString method for displaying branch information
+    /**
+     * Returns a string representation of the branch.
+     *
+     * @return a string displaying the branch ID, name, and location
+     */
     @Override
     public String toString() {
-        return "Branch ID: " + branchId + ", Branch Name: " + branchName + ", Location: " + location;
+        return "Branch ID: " + branchId + ", Branch Name: " + branchName + ", Location: " + location; // Display branch info
     }
 }

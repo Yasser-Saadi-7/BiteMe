@@ -14,9 +14,6 @@ import java.io.IOException;
 public class BranchManagerController {
 
     @FXML
-    private Button btnCreateOrder;
-
-    @FXML
     private Button btnCreateAcc;
 
     @FXML
@@ -25,25 +22,19 @@ public class BranchManagerController {
     @FXML
     private Button btnclose;
 
-    // Method to handle Create Order button click
-    @FXML
-    private void handleCreateOrderButton(ActionEvent event) {
-        Stage currentStage = (Stage) btnCreateOrder.getScene().getWindow(); // Get current stage
-        openFXML("CreateOrder.fxml", "Create Order", currentStage); // Pass the current stage
-    }
 
     // Method to handle Create Account button click
     @FXML
     private void handleCreateAccountButton(ActionEvent event) {
         Stage currentStage = (Stage) btnCreateAcc.getScene().getWindow(); // Get current stage
-        openFXML("CreateAccount.fxml", "Create Account", currentStage); // Pass the current stage
+        openFXML("/gui/CreateAccount.fxml", "Create Account", currentStage); // Pass the current stage
     }
 
     // Method to handle View Monthly Report button click
     @FXML
     private void handleViewMonthlyReportButton(ActionEvent event) {
         Stage currentStage = (Stage) btnViewMR.getScene().getWindow(); // Get current stage
-        openFXML("ViewMonthlyReports.fxml", "View Monthly Report", currentStage); // Pass the current stage
+        openFXML("/gui/ViewMonthlyReports.fxml", "View Monthly Report", currentStage); // Pass the current stage
     }
 
     // Method to handle Close button click
@@ -79,7 +70,6 @@ public class BranchManagerController {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/BranchManagerPage.fxml"));
         Scene scene = new Scene(root);
-        // scene.getStylesheets().add(getClass().getResource("/gui/OrderTrack.css").toExternalForm());
         primaryStage.setTitle("Branch Manager Page");
         primaryStage.setScene(scene);
         primaryStage.show();

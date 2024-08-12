@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="886.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewOrderListController">
+   <children>
+      <Label layoutX="392.0" layoutY="14.0" text="Order List">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TableView fx:id="orderListTable" layoutX="74.0" layoutY="100.0" prefHeight="200.0" prefWidth="739.0">
+        <columns>
+          <TableColumn fx:id="orderLishNumCol" prefWidth="84.79998779296875" text="OrderListNum" />
+          <TableColumn fx:id="resCol" prefWidth="83.20004272460938" text="Restaurant" />
+            <TableColumn fx:id="timeCol" prefWidth="59.19996643066406" text="Time" />
+            <TableColumn fx:id="arrivalCol" prefWidth="89.5999755859375" text="Arrival Time" />
+            <TableColumn fx:id="statusCol" prefWidth="72.0" text="Status" />
+            <TableColumn fx:id="approvalCol" prefWidth="92.0" text="Approval" />
+            <TableColumn fx:id="addressCol" prefWidth="75.20001220703125" text="Address" />
+            <TableColumn fx:id="deliveryCol" prefWidth="101.60003662109375" text="Delivery Service" />
+            <TableColumn fx:id="priceCol" prefWidth="84.79998779296875" text="Price" />
+        </columns>
+      </TableView>
+      <Button layoutX="22.0" layoutY="348.0" mnemonicParsing="false" onAction="#home" text="Home" />
+      <Button layoutX="400.0" layoutY="336.0" mnemonicParsing="false" onAction="#acceptOrder" text="Accept Order" />
+   </children>
+</Pane>

@@ -100,7 +100,7 @@ public class OrderReportController extends BaseReportController {
     @FXML
     private void handleCloseButton(ActionEvent event) {
         Stage currentStage = (Stage) btnClose.getScene().getWindow();
-        openFXML("ViewMonthlyReports.fxml", "View Monthly Report", currentStage);
+        openFXML("/gui/ViewMonthlyReports.fxml", "View Monthly Report", currentStage);
     }
 
     // Method to handle Search button click

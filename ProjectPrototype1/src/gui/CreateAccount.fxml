@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
@@ -43,7 +44,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="createBtn" layoutX="152.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleCreateButton" prefHeight="45.0" prefWidth="151.0" text="Create">
+      <Button fx:id="createBtn" layoutX="152.0" layoutY="310.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="45.0" prefWidth="151.0" text="Create">
          <font>
             <Font size="24.0" />
          </font>
@@ -68,6 +69,12 @@
       <TextField fx:id="usernameTxt" layoutX="380.0" layoutY="122.0" onAction="#createAccount" />
       <Label layoutX="323.0" layoutY="170.0" text="* password:" />
       <Label layoutX="321.0" layoutY="128.0" text="* username:" />
+      <Label layoutX="319.0" layoutY="213.0" text="User Type:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="userTypecombo" layoutX="387.0" layoutY="210.0" onAction="#createAccount" prefWidth="150.0" promptText="Choose User Type" />
       
    </children>
 </Pane>

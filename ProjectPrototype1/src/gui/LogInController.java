@@ -67,7 +67,6 @@ public class LogInController {
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/LogIn.fxml"));
 		Scene scene = new Scene(root);
-		//scene.getStylesheets().add(getClass().getResource("/gui/OrderTrack.css").toExternalForm());
 		primaryStage.setTitle("LogIn Page");
 		primaryStage.setScene(scene);
 		primaryStage.show();

@@ -149,7 +149,7 @@ public class ViewMonthlyReportController {
     @FXML
     private void handleCloseButton(ActionEvent event) {
         Stage currentStage = (Stage) btnclose.getScene().getWindow();
-        openFXML("BranchManagerPage.fxml", "Branch Manager", currentStage);
+        openFXML("/gui/BranchManagerPage.fxml", "Branch Manager", currentStage);
     }
 
     private void openFXML(String fxmlFile, String title, Stage currentStage) {

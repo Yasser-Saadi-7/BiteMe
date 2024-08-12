@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class OrderReport implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int reportId; // Matches SQL reportId
-    private int branchId; // Matches SQL branchId
-    private java.sql.Date reportDate; // Matches SQL reportDate
-    private int totalOrders; // Matches SQL totalOrders
-    private double totalRevenue; // Matches SQL totalRevenue
+    private int reportId; 
+    private int branchId; 
+    private java.sql.Date reportDate;
+    private int totalOrders; 
+    private double totalRevenue; 
 
     // Constructor
     public OrderReport(int reportId, int branchId, java.sql.Date reportDate, int totalOrders, double totalRevenue) {
@@ -61,7 +61,7 @@ public class OrderReport implements Serializable {
         this.totalRevenue = totalRevenue;
     }
 
-    // Optional: Override toString() for better debugging/printing
+    //toString() for better debugging/printing
     @Override
     public String toString() {
         return "OrderReport{" +
