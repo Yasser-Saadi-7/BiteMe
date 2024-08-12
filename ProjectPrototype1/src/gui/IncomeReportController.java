@@ -48,7 +48,7 @@ public class IncomeReportController extends BaseReportController {
     // Method to load income report data
     private void loadIncomeReportData() {
         // Prepare the request data
-        String requestData = String.join(" ", "Income", String.valueOf(managerId), branch, month, year);
+        String requestData = String.join(" ", "Income", String.valueOf(managerId), String.valueOf(branch), month, year);
         sendRequest(MessageType.requestReport, requestData, this::updateIncomeTable);
     }
 

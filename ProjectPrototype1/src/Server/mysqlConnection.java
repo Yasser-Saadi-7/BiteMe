@@ -310,28 +310,149 @@ public class mysqlConnection {
         connectToDB("root", "password"); // replace with actual credentials
     }
 
-    public ArrayList<PerformanceReport> getPerformanceReports(int branchId) {
-        // TODO Auto-generated method stub
-        return null;
+    public static ArrayList<PerformanceReport> getPerformanceReports(int branchId) {
+        ArrayList<PerformanceReport> performanceReportsList = new ArrayList<>();
+        String query = "SELECT reportId, branchId, reportDate, totalOrders, totalRevenue, " +
+                       "averageExpectedDeliveryTime, averageActualDeliveryTime, onTimeDeliveryRate " +
+                       "FROM project.performance_reports WHERE branchId = ?";
+
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setInt(1, branchId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+            	performanceReportsList.add(new PerformanceReport(
+                    rs.getInt("reportId"),
+                    rs.getInt("branchId"),
+                    rs.getDate("reportDate"),
+                    rs.getInt("totalOrders"),
+                    rs.getDouble("totalRevenue"),
+                    rs.getInt("averageExpectedDeliveryTime"),
+                    rs.getInt("averageActualDeliveryTime"),
+                    rs.getDouble("onTimeDeliveryRate")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return performanceReportsList;
     }
 
-    public ArrayList<IncomeReport> getIncomeReports(String selectedBranch) {
-        // TODO Auto-generated method stub
-        return null;
+
+    public static ArrayList<IncomeReport> getIncomeReports(String selectedBranch) {
+        ArrayList<IncomeReport> incomeReportsList = new ArrayList<>();
+        String query = "SELECT branchName, totalIncome, reportDate FROM project.income_reports WHERE branchName = ?";
+
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, selectedBranch);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+            	incomeReportsList.add(new IncomeReport(
+                    rs.getString("branchName"),
+                    rs.getDouble("totalIncome"),
+                    rs.getDate("reportDate")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return incomeReportsList;
     }
+
 
     public boolean assignBranchToManager(int branchId, String managerId) {
-        // TODO Auto-generated method stub
-        return false;
+        String sql = "INSERT INTO project.branch_managers (managerId, branchId) VALUES (?, ?)";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, managerId);
+            pstmt.setInt(2, branchId);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0; // Return true if a row was inserted
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // Return false if there was an error or no rows were affected
     }
 
-    public ArrayList<Branches> getBranchesForManager(String managerIdForBranches) {
-        // TODO Auto-generated method stub
-        return null;
+
+    public static ArrayList<Branches> getBranchesForManager(String managerIdForBranches) {
+        ArrayList<Branches> branchesList = new ArrayList<>();
+        if (con == null) {
+            System.out.println("Database connection is not established.");
+            return null; 
+        }
+
+        String query = "SELECT b.branchId, b.branchName, b.location " +
+                       "FROM project.branches b " +
+                       "JOIN project.branch_managers bm ON b.branchId = bm.branchId " +
+                       "WHERE bm.managerId = ?";
+
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, managerIdForBranches);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                branchesList.add(new Branches(
+                    rs.getInt("branchId"),
+                    rs.getString("branchName"),
+                    rs.getString("location")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return branchesList; // Return the list of branches managed by the specified manager
     }
+
+
+    
 
     public ArrayList<Order> getOrdersForBranch(String managerIdForOrders, String month, String year) {
-        // TODO Auto-generated method stub
-        return null;
+        ArrayList<Order> orderList = new ArrayList<>();
+
+        // SQL query to fetch orders for the specified branch managed by the manager
+        String query = "SELECT o.orderId, o.userID, o.restaurantId, o.totalPrice, o.orderAddress, " +
+                       "o.orderDate, o.deliveryTypeId, o.expectedDeliveryTime, o.actualDeliveryTime, " +
+                       "o.listNumber, o.branchId, o.orderNum " +
+                       "FROM project.orders o " +
+                       "JOIN project.branch_managers bm ON o.branchId = bm.branchId " +
+                       "WHERE bm.managerId = ? " +
+                       "AND MONTH(o.orderDate) = ? " +
+                       "AND YEAR(o.orderDate) = ?";
+
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, managerIdForOrders); // Set managerId
+            pstmt.setString(2, month);               // Set month
+            pstmt.setString(3, year);                // Set year
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                // Create Order object and add to the list
+                Order order = new Order(
+                    rs.getInt("orderId"),
+                    rs.getString("userID"),
+                    rs.getInt("restaurantId"),
+                    rs.getDouble("totalPrice"),
+                    rs.getString("orderAddress"),
+                    rs.getTimestamp("orderDate"),
+                    rs.getInt("deliveryTypeId"),
+                    rs.getString("expectedDeliveryTime"),
+                    rs.getString("actualDeliveryTime"),
+                    rs.getString("listNumber"),
+                    rs.getInt("branchId"),
+                    rs.getString("orderNum")
+                );
+                orderList.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orderList; // Return the list of orders for the specified branch managed by the given manager
     }
+
 }

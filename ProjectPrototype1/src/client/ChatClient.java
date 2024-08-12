@@ -20,9 +20,8 @@ public class ChatClient extends AbstractClient {
 	public static Order o1 = new Order(0, null, 0, 0.0, null, null, 0, null, null, null, 0, null);
 	public static boolean awaitResponse = true; // Flag to wait for server response
 
-	// Log-in and response variables
-	public static String logIn = "error"; // Stores login status
-	
+	public static LogIn logIn;
+
 	public static String checkUserIdResponse = null; // Response for user ID checks
 	public static String checkReportResponse = null; // Response for report checks
 	public static String checkBranchResponse = null; // Response for branch checks
@@ -90,7 +89,7 @@ public class ChatClient extends AbstractClient {
 			list = (ArrayList<Order>) m.getObject();
 			break;
 		case logIn:
-			handleLogInResponse(m);
+			  logIn=(LogIn)m.getObject();
 			break;
 		case showRestaurant:
 			resList = (ArrayList<Restaurant>) m.getObject();
@@ -140,35 +139,6 @@ public class ChatClient extends AbstractClient {
 		}
 	}
 
-	/**
-	 * Handles the response for user login.
-	 *
-	 * @param m the message containing the login response
-	 */
-	private void handleLogInResponse(Message1 m) {
-		logIn = (String) m.getObject();
-
-		// Assuming the message contains user details upon successful login
-		if (!logIn.equals("error")) {
-			String[] userDetails = logIn.split(","); // Example format:
-														// "userId,username,firstName,lastName,email,phone,creditCard,userType,homeBranchId,accountType"
-			String userId = userDetails[0];
-			String firstName = userDetails[1];
-			String lastName = userDetails[2];
-			String email = userDetails[3];
-			String phone = userDetails[4];
-			String creditCard = userDetails[5];
-			UserType userType = UserType.valueOf(userDetails[6]);
-			String username = userDetails[7];
-			String password = userDetails[8];
-			Integer homeBranchId = Integer.valueOf(userDetails[9]);
-			AccountType accountType = AccountType.valueOf(userDetails[10]);
-
-			// Store the logged-in user details using LogIn class
-			loggedInUser = new LogIn(userId, firstName, lastName, email, phone, creditCard, userType, username,
-					password, homeBranchId, accountType);
-		}
-	}
 
 	/**
 	 * Handles the response for searching an order.

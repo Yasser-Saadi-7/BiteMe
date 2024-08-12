@@ -35,9 +35,9 @@ public class ClientConnectionController implements Initializable {
 	}
       Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
    
-      ClientPageController aFrame =new ClientPageController();
+      //ClientPageController aFrame =new ClientPageController();
       
-     // BranchManagerController aFrame =new BranchManagerController();
+      BranchManagerController aFrame =new BranchManagerController();
      BranchManagerController BranchMangerController = new BranchManagerController();
       LogInController logInController = new LogInController();
       try {

@@ -48,7 +48,7 @@ public class PerformanceReportController extends BaseReportController {
 
     private void loadPerformanceReportData() {
         // Construct the request data string
-        String requestData = String.join(" ", "Performance", String.valueOf(managerId), branch, month, year);
+        String requestData = String.join(" ", "Performance", String.valueOf(managerId), String.valueOf(branch), month, year);
         sendRequest(MessageType.requestPerformanceReport, requestData, this::updatePerformanceTableData);
     }
 

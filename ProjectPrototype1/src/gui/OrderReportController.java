@@ -48,7 +48,7 @@ public class OrderReportController extends BaseReportController {
 
     private void loadOrderReportData() {
         // Construct the request data string
-        String requestData = String.join(" ", "Order", String.valueOf(managerId), branch, month, year);
+        String requestData = String.join(" ", "Order", String.valueOf(managerId), String.valueOf(branch), month, year);
         sendRequest(MessageType.requestOrderReport, requestData, this::updateOrderTableData);
     }
 

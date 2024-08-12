@@ -1,9 +1,11 @@
 package gui;
 
+import logic.Branches;
+
 public class BaseReportController {
 
     protected int managerId; // Identifier for the manager
-    protected String branch;  // Branch associated with the report
+    protected Branches branch;  // Branch associated with the report
     protected String month;   // Month for the report
     protected String year;    // Year for the report
 
@@ -19,10 +21,10 @@ public class BaseReportController {
     /**
      * Sets the branch associated with the report.
      *
-     * @param branch the branch to set
+     * @param branches the branch to set
      */
-    public void setBranch(String branch) {
-        this.branch = branch; // Assign the branch
+    public void setBranch(Branches branches) {
+        this.branch = branches; // Assign the branch
     }
 
     /**

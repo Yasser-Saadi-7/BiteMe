@@ -10,30 +10,67 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.application.Platform;
+import logic.Branches;
 import logic.Message1;
 import logic.MessageType;
 import client.ChatClient;
 import client.ClientUI;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+
+import Server.mysqlConnection;
 
 public class ViewMonthlyReportController {
 
     @FXML
-    private ComboBox<String> chooseBrcombo, chooseMocombo, chooseYrcombo;
-
+    private ComboBox<String> chooseMocombo, chooseYrcombo;
+    
+    @FXML
+    private ComboBox<Branches> chooseBrcombo; // ComboBox for branches 
+    
     @FXML
     private Button viewInRepobtn, viewOrderRepobtn, viewPerfRepobtn, btnclose;
 
     private int currentManagerId;
 
+    public void setCurrentManagerId(int managerId) {
+        this.currentManagerId = managerId;
+    }
+
     @FXML
     private void initialize() {
         populateMonthComboBox();
         populateYearComboBox();
-        loadBranchesForManager();
+        if (currentManagerId != 0) {
+            populateBranches(String.valueOf(currentManagerId)); 
+        } else {
+            showAlert("Error", "Current Manager ID is not set.");
+        }
     }
+
+    private void populateBranches(String managerId) {
+        if (managerId == null || managerId.isEmpty()) {
+            showAlert("Error", "Manager ID is not valid.");
+            return;
+        }
+        
+        ArrayList<Branches> branches = mysqlConnection.getBranchesForManager(managerId);
+        
+        if (branches == null) { 
+            showAlert("Error", "Failed to retrieve branches. Please check your database connection.");
+            return;
+        }
+
+        chooseBrcombo.getItems().clear(); 
+        chooseBrcombo.getItems().addAll(branches);
+        
+        if (branches.isEmpty()) {
+            chooseBrcombo.getItems().add(new Branches(0, "No branches available", ""));
+        }
+    }
+
 
     private void populateMonthComboBox() {
         chooseMocombo.getItems().addAll(
@@ -47,40 +84,6 @@ public class ViewMonthlyReportController {
         for (int year = 2010; year <= currentYear; year++) {
             chooseYrcombo.getItems().add(String.valueOf(year));
         }
-    }
-
-    private void loadBranchesForManager() {
-        if (currentManagerId > 0) {
-            // Send request to get branches
-            ClientUI.chat.accept(new Message1(MessageType.getBranchesForManager, String.valueOf(currentManagerId)));
-            // Wait for the response in a separate thread
-            new Thread(this::waitForBranchResponse).start();
-        } else {
-            chooseBrcombo.getItems().add("No branches available");
-        }
-    }
-
-    private void waitForBranchResponse() {
-        // Wait for response and handle it
-        String branchesResponse = ChatClient.checkBranchResponse; // Adjust according to your response handling
-
-        Platform.runLater(() -> {
-            if (branchesResponse != null) {
-                // Assuming branchesResponse is a string with branches separated by commas
-                String[] branches = branchesResponse.split(","); // Update this line based on your actual response format
-                chooseBrcombo.getItems().clear(); // Clear existing items
-                
-                for (String branch : branches) {
-                    chooseBrcombo.getItems().add(branch.trim()); // Add each branch to the ComboBox
-                }
-
-                if (chooseBrcombo.getItems().isEmpty()) {
-                    chooseBrcombo.getItems().add("No branches available");
-                }
-            } else {
-                showAlert("Error", "No response from server. Please check the connection.");
-            }
-        });
     }
 
     @FXML

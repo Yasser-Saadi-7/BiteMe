@@ -83,6 +83,8 @@ public class Branches {
      */
     @Override
     public String toString() {
-        return "Branch ID: " + branchId + ", Branch Name: " + branchName + ", Location: " + location; // Display branch info
+        return branchName;
     }
+    
+
 }
