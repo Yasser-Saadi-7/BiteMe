@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import logic.AccountType;
@@ -16,7 +15,6 @@ import logic.Dish;
 import logic.DeliveryType1;
 import logic.IncomeReport;
 import logic.LogIn;
-import logic.MealType;
 import logic.MealType;
 import logic.Order;
 import logic.OrderList;
@@ -62,12 +60,12 @@ public class mysqlConnection {
                     rs.getDouble("totalPrice"),
                     rs.getString("orderAddress"),
                     rs.getTimestamp("orderDate"),
-                    rs.getInt("deliveryTypeId"), // Fetching deliveryTypeId from the result set
+                    rs.getInt("deliveryTypeId"),
                     rs.getString("expectedDeliveryTime"),
                     rs.getString("actualDeliveryTime"),
-                    rs.getString("listNumber"), // Fetching listNumber from the result set
-                    rs.getInt("branchId"), // Fetching branchId from the result set
-                    rs.getString("orderNum") // Fetching orderNum from the result set
+                    rs.getString("listNumber"),
+                    rs.getInt("branchId"),
+                    rs.getString("orderNum")
                 );
             }
         } catch (SQLException e) {
@@ -75,7 +73,6 @@ public class mysqlConnection {
         }
         return null;
     }
-
 
     public void updateOrderToDB(Object msg) {
         Order message = (Order) msg;
@@ -107,12 +104,12 @@ public class mysqlConnection {
                     res.getDouble("totalPrice"),
                     res.getString("orderAddress"),
                     res.getTimestamp("orderDate"),
-                    res.getInt("deliveryTypeId"), // Fetching deliveryTypeId from the result set
+                    res.getInt("deliveryTypeId"),
                     res.getString("expectedDeliveryTime"),
                     res.getString("actualDeliveryTime"),
-                    res.getString("listNumber"), // Fetching listNumber from the result set
-                    res.getInt("branchId"), // Fetching branchId from the result set
-                    res.getString("orderNum") // Fetching orderNum from the result set
+                    res.getString("listNumber"),
+                    res.getInt("branchId"),
+                    res.getString("orderNum")
                 ));
             }
         } catch (SQLException e) {
@@ -120,7 +117,6 @@ public class mysqlConnection {
         }
         return list;
     }
-
 
     public static LogIn userLogIn(String username, String password) {
         String query = "SELECT userID, firstName, lastName, email, phone, creditCard, userType, username, password, homeBranchId, accountType FROM project.users WHERE username = ? AND password = ?";
@@ -138,11 +134,11 @@ public class mysqlConnection {
                     res.getString("email"),
                     res.getString("phone"),
                     res.getString("creditCard"),
-                    UserType.valueOf(res.getString("userType")), // Assuming userType is a string in DB
+                    UserType.valueOf(res.getString("userType")),
                     res.getString("username"),
                     res.getString("password"),
                     res.getInt("homeBranchId"),
-                    AccountType.valueOf(res.getString("accountType")) // Assuming accountType is a string in DB
+                    AccountType.valueOf(res.getString("accountType"))
                 );
             }
         } catch (SQLException e) {
@@ -151,6 +147,23 @@ public class mysqlConnection {
         return null;
     }
 
+    // New method to return the user type as a String
+    public static String getUserType(String username, String password) {
+        String query = "SELECT userType FROM project.users WHERE username = ? AND password = ?";
+        
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            ResultSet res = pstmt.executeQuery();
+
+            if (res.next()) {
+                return res.getString("userType"); // Return the userType directly as a String
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static ArrayList<Restaurant> getAllRes() {
         ArrayList<Restaurant> allRes = new ArrayList<>();
@@ -175,22 +188,20 @@ public class mysqlConnection {
 
         try (Statement stmt = con.createStatement(); ResultSet res = stmt.executeQuery(query)) {
             while (res.next()) {
-                // Filter by restaurantId
                 if (restaurantId == res.getInt("restaurantId")) {
                     allMealType.add(new MealType(
-                        res.getString("restaurantName"), // Assuming you have restaurant name in the meal types table
+                        res.getString("restaurantName"),
                         res.getString("mealTypeId"),
                         res.getString("mealTypeName"),
-                        restaurantId // Using restaurantId from the method parameter
+                        restaurantId
                     ));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return allMealType; // Returning the correctly named list
+        return allMealType;
     }
-
 
     public static ArrayList<Dish> getDishes(String typeMealId) {
         ArrayList<Dish> allDishes = new ArrayList<>();
@@ -237,11 +248,10 @@ public class mysqlConnection {
 
         try (Statement stmt = con.createStatement(); ResultSet res = stmt.executeQuery(query)) {
             while (res.next()) {
-                // Create a new DeliveryType1 object using all the required fields
                 allDeliveryTypes.add(new DeliveryType1(
-                    res.getInt("id"),          // Assuming 'id' is of type int
-                    res.getString("typeName"), // Assuming 'typeName' is a String
-                    res.getDouble("price")     // Assuming 'price' is a Double
+                    res.getInt("id"),
+                    res.getString("typeName"),
+                    res.getDouble("price")
                 ));
             }
         } catch (SQLException e) {
@@ -249,8 +259,6 @@ public class mysqlConnection {
         }
         return allDeliveryTypes;
     }
-
-    
 
     public boolean createAccount(String userID, String firstName, String lastName, String email, String phone,
                                   String creditCard, UserType userType, String username, String password, int homeBranchId,
@@ -302,28 +310,28 @@ public class mysqlConnection {
         connectToDB("root", "password"); // replace with actual credentials
     }
 
-	public ArrayList<PerformanceReport> getPerformanceReports(int branchId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public ArrayList<PerformanceReport> getPerformanceReports(int branchId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public ArrayList<IncomeReport> getIncomeReports(String selectedBranch) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public ArrayList<IncomeReport> getIncomeReports(String selectedBranch) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public boolean assignBranchToManager(int branchId, String managerId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public boolean assignBranchToManager(int branchId, String managerId) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	public ArrayList<Branches> getBranchesForManager(String managerIdForBranches) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public ArrayList<Branches> getBranchesForManager(String managerIdForBranches) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public ArrayList<Order> getOrdersForBranch(String managerIdForOrders, String month, String year) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public ArrayList<Order> getOrdersForBranch(String managerIdForOrders, String month, String year) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

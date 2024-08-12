@@ -10,7 +10,7 @@ public class Restaurant implements Serializable {
 
     private int restaurantId;      // Unique identifier for the restaurant
     private int branchId;          // ID of the branch to which the restaurant belongs
-    private String restaurantName;  // Name of the restaurant
+    private String resName;  // Name of the restaurant
     private String branch_location;  // Location of the restaurant branch
     private String phone_number;     // Phone number of the restaurant
 
@@ -21,10 +21,10 @@ public class Restaurant implements Serializable {
      * @param branchId         the ID of the branch to which the restaurant belongs
      * @param restaurantName    the name of the restaurant
      */
-    public Restaurant(int restaurantId, int branchId, String restaurantName) {
+    public Restaurant(int restaurantId, int branchId, String resName) {
         this.restaurantId = restaurantId;      // Initialize restaurantId
         this.branchId = branchId;              // Initialize branchId
-        this.restaurantName = restaurantName;  // Initialize restaurantName
+        this.resName = resName;  // Initialize resName
         this.branch_location = branch_location;  // Initialize branch location
         this.phone_number = phone_number;        // Initialize phone number
     }
@@ -71,7 +71,7 @@ public class Restaurant implements Serializable {
      * @return the restaurant name
      */
     public String getRestaurantName() {
-        return restaurantName; // Return the restaurant name
+        return resName; // Return the restaurant name
     }
 
     /**
@@ -79,8 +79,8 @@ public class Restaurant implements Serializable {
      *
      * @param restaurantName the restaurant name
      */
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName; // Set the restaurant name
+    public void setRestaurantName(String resName) {
+        this.resName = resName; // Set the restaurant name
     }
 
     /**
@@ -129,7 +129,7 @@ public class Restaurant implements Serializable {
         return "Restaurant{" +
                 "restaurantId=" + restaurantId +
                 ", branchId=" + branchId +
-                ", restaurantName='" + restaurantName + '\'' +
+                ", restaurantName='" + resName + '\'' +
                 ", branch_location='" + branch_location + '\'' +
                 ", phone_number='" + phone_number + '\'' +
                 '}';

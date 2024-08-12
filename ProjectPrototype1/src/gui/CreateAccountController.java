@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import logic.AccountType;
+import logic.BranchManager;
 import logic.CreateAccount; // Import CreateAccount class
 import logic.LogIn; // Import LogIn class
 import logic.Message1;
@@ -36,7 +37,7 @@ public class CreateAccountController {
     private ComboBox<UserType> userTypecombo;
 
     // Store the logged-in manager's details
-    private LogIn loggedInManager;
+    private BranchManager loggedInManager; 
 
     // Method to initialize the controller
     @FXML
@@ -51,7 +52,7 @@ public class CreateAccountController {
     }
 
     // Setter method for loggedInManager
-    public void setLoggedInManager(LogIn loggedInManager) {
+    public void setLoggedInManager(BranchManager loggedInManager) { 
         this.loggedInManager = loggedInManager;
     }
 
@@ -79,8 +80,8 @@ public class CreateAccountController {
         // Debugging line
         System.out.println("Collected data: " + userID + ", " + firstName + ", " + lastName + ", " + email + ", " + phone + ", " + creditCard + ", " + username + ", " + password + ", " + userType);
 
-        // The new user's homeBranchId is set to the homeBranch of the logged-in manager
-        int homeBranchId = loggedInManager != null ? loggedInManager.getHomeBranchId() : null;
+        // The new user's homeBranchId is set to the branchId of the logged-in manager
+        int homeBranchId = loggedInManager != null ? loggedInManager.getBranchId() : -1; // Use -1 or an appropriate default for an invalid case
 
         // Determine accountType based on whether creditCard is filled
         AccountType accountType = creditCard.isEmpty() ? AccountType.BUSINESS : AccountType.PRIVATE;
