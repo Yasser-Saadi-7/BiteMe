@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<!--
+  ClientPage.fxml — redesigned for a clean, modern look.
+  Controller: controllers.ClientPageController
+  Preserves fx:id: btncreateorder, btnvieworderslist, txtwelcome, btnlogout
+  Notes:
+  - Background image is optional; remove the style attr if you prefer a flat background.
+  - Buttons keep their fx:id; only visual styleClasses were added.
+-->
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.ClientPageController"
+           prefWidth="960.0" prefHeight="600.0"
+           stylesheets="@/css/LogIn.css"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+    <children>
+        <!-- Subtle tint over the background to improve contrast -->
+        <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+        <!-- Main frame -->
+        <BorderPane maxWidth="1040">
+
+            <!-- Top header: app name (left) + logout (right) -->
+            <top>
+                <HBox spacing="8">
+                    <padding>
+                        <Insets top="20" right="24" bottom="0" left="24"/>
+                    </padding>
+                    <children>
+                        <Label text="BiteMe" style="-fx-text-fill: white;">
+                            <font><Font name="Segoe UI Semibold" size="20"/></font>
+                        </Label>
+                        <Label text="•  Client" style="-fx-text-fill: rgba(255,255,255,0.85);"/>
+                        <Pane HBox.hgrow="ALWAYS"/>
+                        <!-- keep fx:id and action exactly as in your original -->
+                        <Button fx:id="btnlogout" text="Log Out" onAction="#logOut" styleClass="danger"/>
+                    </children>
+                </HBox>
+            </top>
+
+            <!-- Center content card -->
+            <center>
+                <StackPane BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox styleClass="card" spacing="18" maxWidth="680">
+                            <padding>
+                                <Insets top="22" right="22" bottom="22" left="22"/>
+                            </padding>
+
+                            <!-- Page title + welcome (fx:id preserved) -->
+                            <VBox spacing="4">
+                                <Label text="Client Page" styleClass="heading-1"/>
+                                <Label fx:id="txtwelcome" text="Welcome!" styleClass="muted"/>
+                            </VBox>
+
+                            <!-- Actions -->
+                            <GridPane hgap="12" vgap="12">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+                                </columnConstraints>
+
+                                <children>
+                                    <!-- Keep original fx:id; only add styleClass for visuals -->
+                                    <Button fx:id="btncreateorder"
+                                            text="Create New Order"
+                                            onAction="#createNewOrder"
+                                            GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                            styleClass="primary"/>
+
+                                    <Button fx:id="btnvieworderslist"
+                                            text="View My Orders List"
+                                            onAction="#viewOrdersList" 
+                                            GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                                    <!-- Your 'My Cart' button had no fx:id; leaving it that way is safe -->
+                                    <Button text="My Cart"
+                                            onAction="#myCart"
+                                            GridPane.columnIndex="0" GridPane.rowIndex="1"
+                                            styleClass="ghost"/>
+
+                                    <!-- Spacer cell to balance layout -->
+                                    <Pane GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                </children>
+                            </GridPane>
+
+                            <!-- Optional helper text -->
+                            <Label text="Tip: You can review your orders at any time from the list."
+                                   styleClass="muted"/>
+                        </VBox>
+                    </children>
+                </StackPane>
+            </center>
+
+        </BorderPane>
+    </children>
+</StackPane>

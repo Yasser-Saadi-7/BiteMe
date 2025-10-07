@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" 
+           xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="controllers.BranchManagerController" 
+           prefWidth="900" prefHeight="560" 
+           stylesheets="@/css/LogIn.css" 
+           style="-fx-background-image: url('/images/LogIn.png'); -fx-background-size: cover; -fx-background-position: center;">
+
+    <children>
+        <Pane style="-fx-background-color: rgba(0,0,0,0.35);" StackPane.alignment="CENTER"/>
+
+        <StackPane StackPane.alignment="CENTER">
+            <children>
+                <VBox styleClass="card" spacing="18.0" alignment="CENTER">
+                    <padding>
+                        <Insets top="28" right="28" bottom="28" left="28"/>
+                    </padding>
+                    
+                    <Label text="Branch Manager Menu" styleClass="heading-1">
+                        <font>
+                            <Font size="26" />
+                        </font>
+                    </Label>
+
+                    <Label text="Manage accounts and view monthly reports" styleClass="muted" wrapText="true" maxWidth="560"/>
+
+                    <VBox spacing="12" alignment="CENTER" maxWidth="520">
+                        <Button fx:id="btnCreateAcc" onAction="#handleCreateAccountButton"
+                                text="Create New Account"
+                                prefWidth="420" prefHeight="56" styleClass="primary-button" />
+
+                        <Button fx:id="btnViewMR" onAction="#handleViewMonthlyReportButton"
+                                text="View Monthly Reports"
+                                prefWidth="420" prefHeight="56" styleClass="secondary-button" />
+
+                        <Label text="Choose an action to continue" styleClass="muted-small"/>
+                    </VBox>
+
+                    <Button fx:id="btnclose" onAction="#handleCloseButton"
+                            text="Log Out"
+                            prefWidth="140" prefHeight="40" styleClass="danger-small" />
+                </VBox>
+            </children>
+        </StackPane>
+    </children>
+</StackPane>

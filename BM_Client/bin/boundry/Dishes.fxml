@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<!--
+  Dishes.fxml — modern responsive layout
+  Controller: controllers.DishesController
+  Preserves:
+    - fx:id: dishesTable, dishNameCol, priceCol
+    - onAction: #logOut, #home, #back, #next
+  Styling:
+    - Uses your shared stylesheet (adjust path/name if different)
+    - Optional background image; remove 'style' if you prefer a flat background
+-->
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.DishesController"
+           prefWidth="1000.0" prefHeight="640.0"
+           stylesheets="@/css/LogIn.css"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+  <children>
+
+    <!-- Subtle tint above the background to improve contrast -->
+    <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+    <!-- Main frame: header + centered content -->
+    <BorderPane maxWidth="1100">
+
+      <!-- Header: app name + page title + Log Out -->
+      <top>
+        <HBox spacing="8">
+          <padding><Insets top="20" right="24" bottom="12" left="24"/></padding>
+          <children>
+            <Label text="BiteMe" style="-fx-text-fill: white;">
+              <font><Font name="Segoe UI Semibold" size="20"/></font>
+            </Label>
+            <Label text="•  Dishes" style="-fx-text-fill: rgba(255,255,255,0.85);">
+              <font><Font size="16"/></font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Log Out" onAction="#logOut" styleClass="danger"/>
+          </children>
+        </HBox>
+      </top>
+
+      <!-- Center content card -->
+      <center>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+            <VBox styleClass="card" spacing="18" maxWidth="900" maxHeight="520">
+              <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+              <!-- Title + helper -->
+              <VBox spacing="4">
+                <Label text="Dishes" styleClass="heading-1"/>
+                <Label text="Select a dish to continue" styleClass="muted"/>
+              </VBox>
+
+              <!-- Table (IDs preserved) -->
+              <TableView fx:id="dishesTable" prefHeight="380.0">
+                <columns>
+                  <TableColumn fx:id="dishNameCol" text="Dish Name" prefWidth="680.0"/>
+                  <TableColumn fx:id="priceCol"    text="Price"     prefWidth="180.0"/>
+                </columns>
+              </TableView>
+
+              <!-- Actions row (handlers preserved) -->
+              <HBox spacing="10">
+                <Button text="Home" onAction="#home"/>
+                <Button text="Back" onAction="#back"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Next" onAction="#next" styleClass="primary"/>
+              </HBox>
+
+            </VBox>
+          </children>
+        </StackPane>
+      </center>
+
+    </BorderPane>
+  </children>
+</StackPane>

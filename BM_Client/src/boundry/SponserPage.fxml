@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controllers.SponserController"
+           prefWidth="900.0" prefHeight="520.0"
+           stylesheets="@/css/LogIn.css"
+           style="-fx-background-image: url('/images/LogIn.png'); -fx-background-size: cover; -fx-background-position: center;">
+
+    <children>
+        <Pane style="-fx-background-color: rgba(0,0,0,0.35);" StackPane.alignment="CENTER"/>
+
+        <VBox alignment="TOP_CENTER" spacing="18.0" maxWidth="760" maxHeight="420" styleClass="card" StackPane.alignment="CENTER">
+            <padding>
+                <Insets top="28" right="28" bottom="28" left="28"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Label text="Sponsor Portal" styleClass="heading-1"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <Label text="Manage sponsorships, view orders and handle your cart from one place." styleClass="muted" wrapText="true"/>
+
+            <HBox spacing="24" alignment="CENTER" style="-fx-padding: 18 0 0 0;">
+                <Button fx:id="ViewOrdersListbtn" onAction="#viewOrdersList" text="View Orders List" prefWidth="300" prefHeight="90" styleClass="primary-large"/>
+
+                <VBox spacing="6" alignment="TOP_CENTER">
+                    <Button fx:id="logOutbtn" onAction="#logOut" text="Log Out" prefWidth="140" prefHeight="44" styleClass="danger-small"/>
+                    <Label text="Signed in as Sponsor" styleClass="muted-small"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </children>
+</StackPane>

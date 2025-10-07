@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.RestaurantController"
+           prefWidth="1000.0" prefHeight="640.0"
+           stylesheets="@/css/LogIn.css"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+  <children>
+    <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+    <BorderPane maxWidth="1100">
+
+      <!-- Header -->
+      <top>
+        <HBox spacing="8">
+          <padding><Insets top="20" right="24" bottom="12" left="24"/></padding>
+          <children>
+            <Label text="BiteMe" style="-fx-text-fill: white;">
+              <font><Font name="Segoe UI Semibold" size="20"/></font>
+            </Label>
+            <Label text="•  Restaurants" style="-fx-text-fill: rgba(255,255,255,0.85);">
+              <font><Font size="16"/></font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Log Out" onAction="#logOut" styleClass="danger"/>
+          </children>
+        </HBox>
+      </top>
+
+      <!-- Center: card with ListView -->
+      <center>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+            <VBox styleClass="card" spacing="18" maxWidth="900" maxHeight="520">
+              <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+              <VBox spacing="4">
+                <Label text="Restaurants" styleClass="heading-1"/>
+                <Label text="Select a restaurant to view its menu" styleClass="muted"/>
+              </VBox>
+
+              <!-- NEW: ListView instead of TableView -->
+              <ListView fx:id="restaurantList" prefHeight="380.0"/>
+
+              <!-- Actions row -->
+              <HBox spacing="10">
+                <Button fx:id="btnshowmenu" text="Show Menu" onAction="#showMenu" styleClass="primary"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Back" onAction="#back"/>
+              </HBox>
+
+            </VBox>
+          </children>
+        </StackPane>
+      </center>
+
+    </BorderPane>
+  </children>
+</StackPane>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<!--
+  Delivery.fxml - centered layout
+  Controller: controllers.DeliveryController
+
+  Preserved ids:
+    reqTimetxt, addtxt, totalPricelbl, reqDate
+  Preserved actions:
+    #home, #back, #confirm
+-->
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.DeliveryController"
+           prefWidth="1000.0" prefHeight="640.0"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+  <stylesheets>
+    <URL value="@../css/LogIn.css"/>
+  </stylesheets>
+
+  <children>
+    <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+    <BorderPane maxWidth="1100">
+
+      <!-- Top bar -->
+      <top>
+        <HBox spacing="8">
+          <padding><Insets top="20" right="24" bottom="0" left="24"/></padding>
+          <children>
+            <Label text="BiteMe" style="-fx-text-fill: white;">
+              <font><Font name="Segoe UI Semibold" size="20"/></font>
+            </Label>
+            <Label text="• Delivery" style="-fx-text-fill: rgba(255,255,255,0.85);">
+              <font><Font size="16"/></font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Home" onAction="#home"/>
+          </children>
+        </HBox>
+      </top>
+
+      <!-- Center card -->
+      <center>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+
+            <VBox styleClass="card" spacing="18" maxWidth="760" maxHeight="540">
+              <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+              <!-- Heading -->
+              <VBox spacing="4">
+                <Label text="Delivery" styleClass="heading-1"/>
+                <Label text="Enter delivery details and confirm your order."
+                       styleClass="muted"/>
+              </VBox>
+
+              <!-- Form -->
+              <GridPane hgap="16" vgap="12">
+                <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" minWidth="140"/>
+                  <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <!-- Requested Date -->
+                <Label text="Requested Date:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <DatePicker fx:id="reqDate"
+                            prefWidth="280.0"
+                            GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <!-- Requested Time -->
+                <Label text="Requested Time:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <TextField fx:id="reqTimetxt"
+                           promptText="HH:mm"
+                           prefWidth="280.0"
+                           GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <!-- Address -->
+                <Label text="Address:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <TextField fx:id="addtxt"
+                           promptText="Street, Number, City"
+                           prefWidth="420.0"
+                           GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <!-- Total Price -->
+                <Label text="Total Price:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <Label fx:id="totalPricelbl"
+                       styleClass="heading-2"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+              </GridPane>
+
+              <!-- Actions -->
+              <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Back" onAction="#back"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Confirm" onAction="#confirm" styleClass="primary"/>
+              </HBox>
+
+            </VBox>
+
+          </children>
+        </StackPane>
+      </center>
+
+    </BorderPane>
+  </children>
+</StackPane>

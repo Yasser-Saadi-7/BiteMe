@@ -1,0 +1,48 @@
+
+.root {
+    -bm-bg: #0f172a;
+    -bm-surface: rgba(255,255,255,0.94);
+    -bm-surface-2: #eef2f7;
+    -bm-text: #0b1221;
+    -bm-muted: #5b6474;
+    -bm-primary: #14b8a6;
+    -bm-primary-600: #0d9488;
+    -bm-primary-50: #e6fffb;
+    -bm-danger: #ef4444;
+    -bm-radius: 12px;
+    -bm-radius-lg: 16px;
+    -fx-focus-color: -bm-primary;
+    -fx-faint-focus-color: rgba(20,184,166,0.22);
+}
+
+
+.overlay-tint { -fx-background-color: rgba(2, 6, 23, 0.38); }
+
+
+.card {
+    -fx-background-color: -bm-surface;
+    -fx-background-radius: -bm-radius-lg;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 20, 0.3, 0, 6);
+    -fx-padding: 18;
+}
+.button { -fx-background-radius: 999px; -fx-padding: 10 16; -fx-font-weight: 600; -fx-cursor: hand; -fx-background-color: #e5e7eb; -fx-text-fill: -bm-text; }
+.button:hover { -fx-background-color: #dfe3ea; }
+.button:pressed { -fx-translate-y: 1; }
+.button.primary { -fx-background-color: -bm-primary; -fx-text-fill: white; }
+.button.primary:hover { -fx-background-color: -bm-primary-600; }
+.button.danger { -fx-background-color: -bm-danger; -fx-text-fill: white; }
+
+.text-field, .password-field {
+    -fx-background-radius: 10px;
+    -fx-background-color: white;
+    -fx-border-color: #dfe3ea;
+    -fx-border-radius: 10px;
+    -fx-padding: 10 12;
+    -fx-text-fill: -bm-text;
+}
+.text-field:focused, .password-field:focused {
+    -fx-border-color: -bm-primary;
+    -fx-effect: dropshadow(gaussian, rgba(20,184,166,0.28), 12, 0.25, 0, 3);
+}
+.label.heading-1 { -fx-font-size: 22px; -fx-font-weight: 800; -fx-text-fill: -bm-text; }
+.label.muted { -fx-text-fill: -bm-muted; }

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+
+<!--
+  Selections.fxml — modern responsive layout
+  Controller: controllers.SelectionsController
+  Preserves IDs:
+    selectionTable, selectionNameCol, priceCol,
+    yourSelectionTable, yourSelectionNameCol, yourPriceCol
+  Preserves actions:
+    #home, #back, #next, #logOut, #add, #remove
+-->
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.SelectionsController"
+           prefWidth="1000.0" prefHeight="640.0"
+           style="-fx-background-image: url('@../images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+  <!-- Stylesheet (relative path from src/boundry/) -->
+  <stylesheets>
+    <URL value="@/css/LogIn.css"/>
+  </stylesheets>
+
+  <children>
+
+    <!-- Overlay tint for readability -->
+    <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+    <BorderPane maxWidth="1100">
+
+      <!-- Header: app name, page title, navigation buttons -->
+      <top>
+        <HBox spacing="8">
+          <padding><Insets top="20" right="24" bottom="12" left="24"/></padding>
+          <children>
+            <Label text="BiteMe" style="-fx-text-fill: white;">
+              <font><Font name="Segoe UI Semibold" size="20"/></font>
+            </Label>
+            <Label text="•  Selections" style="-fx-text-fill: rgba(255,255,255,0.85);">
+              <font><Font size="16"/></font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Home" onAction="#home"/>
+            <Button text="Log Out" onAction="#logOut" styleClass="danger"/>
+          </children>
+        </HBox>
+      </top>
+
+      <!-- Center card with two tables and actions -->
+      <center>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+
+            <VBox styleClass="card" spacing="18" maxWidth="980" maxHeight="540">
+              <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+              <!-- Title & instructions -->
+              <VBox spacing="4">
+                <Label text="Choose additions for your dish" styleClass="heading-1"/>
+                <Label text="Select from the left table and move to your selections" styleClass="muted"/>
+              </VBox>
+
+              <!-- Two tables side by side -->
+              <GridPane hgap="16" vgap="10">
+                <columnConstraints>
+                  <ColumnConstraints percentWidth="50"/>
+                  <ColumnConstraints percentWidth="50"/>
+                </columnConstraints>
+
+                <!-- Available selections -->
+                <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                  <Label text="Available selections" styleClass="muted"/>
+                  <TableView fx:id="selectionTable" prefHeight="320.0">
+                    <columns>
+                      <TableColumn fx:id="selectionNameCol" text="Selection" prefWidth="360.0"/>
+                      <TableColumn fx:id="priceCol"         text="Price"     prefWidth="120.0"/>
+                    </columns>
+                  </TableView>
+                </VBox>
+
+                <!-- User's selections -->
+                <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                  <Label text="Your selections" styleClass="muted"/>
+                  <TableView fx:id="yourSelectionTable" prefHeight="320.0">
+                    <columns>
+                      <TableColumn fx:id="yourSelectionNameCol" text="Selection" prefWidth="360.0"/>
+                      <TableColumn fx:id="yourPriceCol"         text="Price"     prefWidth="120.0"/>
+                    </columns>
+                  </TableView>
+                </VBox>
+
+                <!-- Add / Remove buttons -->
+                <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+                  <Button text="Add"    onAction="#add"    styleClass="primary"/>
+                  <Button text="Remove" onAction="#remove"/>
+                  <Pane HBox.hgrow="ALWAYS"/>
+                </HBox>
+              </GridPane>
+
+              <!-- Bottom action row -->
+              <HBox spacing="12" alignment="CENTER_RIGHT">
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Back" onAction="#back"/>
+                <Button text="Next" onAction="#next" styleClass="primary"/>
+              </HBox>
+
+            </VBox>
+
+          </children>
+        </StackPane>
+      </center>
+
+    </BorderPane>
+  </children>
+</StackPane>

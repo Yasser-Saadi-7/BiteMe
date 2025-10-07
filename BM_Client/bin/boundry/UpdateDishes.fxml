@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controllers.UpdateDishesController"
+           prefWidth="960.0" prefHeight="600.0"
+           stylesheets="@/css/LogIn.css"
+           style="-fx-background-size: cover; -fx-background-position: center;">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #2f3640;">
+            <padding>
+                <Insets top="15.0" right="25.0" bottom="15.0" left="25.0" />
+            </padding>
+            <Button onAction="#logOut" text="Log Out" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+            <Label text="Update Dishes" textFill="white">
+                <font>
+                    <Font name="Segoe UI Semibold" size="20.0" />
+                </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#home" text="Home" styleClass="secondary-action-button" />
+        </HBox>
+    </top>
+
+    <center>
+        <HBox spacing="20.0">
+            <padding>
+                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+            </padding>
+            
+            <TableView fx:id="dishesTable" prefWidth="500.0" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="dishNameCol" prefWidth="350.0" text="Dish Name" />
+                    <TableColumn fx:id="priceCol" prefWidth="150.0" text="Price" />
+                </columns>
+            </TableView>
+
+            <VBox spacing="15.0" prefWidth="350.0">
+                <Label text="Delete Selected Dish" textFill="#2f3640">
+                    <font>
+                        <Font name="Segoe UI Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Button onAction="#delete" text="Delete" styleClass="danger-button" />
+
+                <Label text="Update Dish Price" textFill="#2f3640">
+                    <font>
+                        <Font name="Segoe UI Bold" size="18.0" />
+                    </font>
+                </Label>
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <Label text="New Price:" />
+                    <TextField fx:id="newPricetxt" prefWidth="100.0" />
+                    <Button onAction="#UpdateDishPrice" text="Update" styleClass="primary-action-button" />
+                </HBox>
+
+                <Label text="Add New Dish" textFill="#2f3640">
+                    <font>
+                        <Font name="Segoe UI Bold" size="18.0" />
+                    </font>
+                </Label>
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <Label text="Dish Name:" />
+                    <TextField fx:id="dishNametxt" prefWidth="150.0" />
+                </HBox>
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <Label text="Dish Price:" />
+                    <TextField fx:id="pricetxt" prefWidth="100.0" />
+                    <Button onAction="#add" text="Add" styleClass="success-button" />
+                </HBox>
+
+                <Label fx:id="txtmessage" text="Please select or add a dish" textFill="#e84118" />
+
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

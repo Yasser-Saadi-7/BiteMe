@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.CreateAccountController"
+            prefWidth="650" prefHeight="720"
+            stylesheets="@/css/LogIn.css"
+            styleClass="root-pane"
+            style="-fx-background-image: url('/images/LogIn.png'); -fx-background-size: cover; -fx-background-position: center;">
+
+    <Label text="Create New Account" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="0"
+           AnchorPane.rightAnchor="0" alignment="CENTER"
+           styleClass="title-label" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+
+    <VBox spacing="18" AnchorPane.topAnchor="80" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="Fnametxt" promptText="First Name" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+             <TextField fx:id="Lnametxt" promptText="Last Name" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="idTxt" promptText="ID" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="phoneNumTxt" promptText="Phone Number" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+        </HBox>
+        
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="emailTxt" promptText="Email" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="creditCardTxt" promptText="Credit Card" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+        </HBox>
+        
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="userTxt" promptText="Username" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+        </HBox>
+        
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <PasswordField fx:id="passTxt" promptText="Password" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <ComboBox fx:id="userTypecombo" promptText="Select User Type" styleClass="combo-box" prefWidth="Infinity"/>
+        </HBox>
+    </VBox>
+
+    <Button fx:id="btnclose" text="Close" onAction="#handleCloseButton" styleClass="btn-danger"
+            AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
+
+    <HBox spacing="15" alignment="CENTER_RIGHT"
+          AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+        <Button fx:id="clrFields" text="Clear Fields" onAction="#handleClearFieldsButton" styleClass="btn-secondary" />
+        <Button fx:id="createBtn" text="Create Account" onAction="#handleCreateButton" styleClass="btn-primary" />
+    </HBox>
+
+    <Label fx:id="txtmessage" text="" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" alignment="CENTER"/>
+</AnchorPane>

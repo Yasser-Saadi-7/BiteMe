@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controllers.UpdateStatusController"
+           prefWidth="1200.0" prefHeight="680.0"
+           stylesheets="@/css/Yaser.css"
+           style="-fx-background-image: url('/images/LogIn.png'); -fx-background-size: cover; -fx-background-position: center;">
+
+  <children>
+    <Pane style="-fx-background-color: rgba(0,0,0,0.28);" StackPane.alignment="CENTER"/>
+
+    <BorderPane maxWidth="1100" StackPane.alignment="CENTER">
+      <top>
+        <HBox spacing="12" style="-fx-padding: 18 24; -fx-alignment: center-left;">
+          <children>
+            <Label text="Update Orders Status" styleClass="page-title">
+              <font><Font size="28"/></font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button fx:id="LogOutbtn" onAction="#logOut" text="Log Out" styleClass="icon-button" />
+          </children>
+        </HBox>
+      </top>
+
+      <center>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+            <VBox styleClass="card" spacing="14" maxWidth="1040">
+              <padding>
+                <Insets top="18" right="18" bottom="18" left="18"/>
+              </padding>
+
+              <TableView fx:id="OrdersTable" prefHeight="360.0" prefWidth="1000.0" VBox.vgrow="ALWAYS">
+                <columns>
+                  <TableColumn fx:id="UserIdCol" text="User Id" prefWidth="80.0"/>
+                  <TableColumn fx:id="OrderListNumCol" text="Order List Number" prefWidth="140.0"/>
+                  <TableColumn fx:id="ResturantCol" text="Restaurant" prefWidth="120.0"/>
+                  <TableColumn fx:id="OrderDateCol" text="Order Date" prefWidth="110.0"/>
+                  <TableColumn fx:id="TotalPriceCol" text="Total Price" prefWidth="110.0"/>
+                  <TableColumn fx:id="AddressCol" text="Address" prefWidth="180.0"/>
+                  <TableColumn fx:id="DeliveryServCol" text="Delivery Service" prefWidth="140.0"/>
+                  <TableColumn fx:id="StatusCol" text="Status" prefWidth="90.0"/>
+                  <TableColumn fx:id="ApprovalCol" text="Approval" prefWidth="100.0"/>
+                  <TableColumn fx:id="ArrivalTimeCol" text="Expected Time" prefWidth="120.0"/>
+                  <TableColumn fx:id="RequestedTimeCol" text="Requested Time" prefWidth="130.0"/>
+                </columns>
+              </TableView>
+
+              <Label text="Select a row to update. Expected time is required for deliveries." styleClass="muted"/>
+
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <children>
+                  <Label text="Expected time:"/>
+                  <TextField fx:id="expectedTimetxt" prefWidth="160" promptText="HH:mm"/>
+                  <Pane HBox.hgrow="ALWAYS"/>
+                  <Button fx:id="Approvebtn" onAction="#Approve" text="Approve" prefWidth="140" styleClass="primary-small" />
+                  <Button fx:id="Readybtn" onAction="#Ready" text="Ready" prefWidth="140" styleClass="secondary-small" />
+                  <Button fx:id="Homebtn" onAction="#home" text="Home" prefWidth="120" styleClass="tertiary-small" />
+                </children>
+              </HBox>
+            </VBox>
+          </children>
+        </StackPane>
+      </center>
+
+      <bottom>
+        <HBox style="-fx-padding: 12 24 18 24; -fx-alignment: center-left;">
+          <Label text="Note: Expected time must be filled when delivery service is selected." styleClass="muted-small"/>
+        </HBox>
+      </bottom>
+    </BorderPane>
+  </children>
+</StackPane>

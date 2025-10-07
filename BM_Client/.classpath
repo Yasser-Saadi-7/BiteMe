@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/LibericaJDK-17-Full">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/OCSF"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/BM_Server"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Common"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/ikonli-fontawesome5-pack-12.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/ikonli-javafx-12.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/ikonli-core-12.3.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

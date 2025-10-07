@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<!--
+  PaymentCompleted.fxml - modern centered layout
+  Controller: controllers.PaymentCompletedController
+
+  Preserved fx:id:
+    orderNumberlbl
+  Preserved actions:
+    #home
+-->
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.PaymentCompletedController"
+           prefWidth="1000.0" prefHeight="640.0"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+ 
+  <stylesheets>
+    <URL value="@../css/LogIn.css"/>
+  </stylesheets>
+
+  <children>
+   
+    <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+    <BorderPane maxWidth="1100">
+
+      
+      <top>
+        <HBox spacing="8">
+          <padding><Insets top="20" right="24" bottom="0" left="24"/></padding>
+          <children>
+            <Label text="BiteMe" style="-fx-text-fill: white;">
+              <font><Font name="Segoe UI Semibold" size="20"/></font>
+            </Label>
+            <Label text="• Payment Completed" style="-fx-text-fill: rgba(255,255,255,0.85);">
+              <font><Font size="16"/></font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Home" onAction="#home"/>
+          </children>
+        </HBox>
+      </top>
+
+      
+      <center>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+
+            <VBox styleClass="card" spacing="18" maxWidth="720" maxHeight="520">
+              <padding><Insets top="28" right="28" bottom="28" left="28"/></padding>
+
+              <!-- כותרת ותת-כותרת -->
+              <VBox spacing="6" alignment="CENTER">
+                <Label text="Thank You!" styleClass="heading-1">
+                  <font><Font size="28"/></font>
+                </Label>
+                <Label text="Payment has been completed successfully" styleClass="muted"/>
+              </VBox>
+
+              
+              <VBox spacing="10" alignment="CENTER">
+                <Label text="Your order number is:" styleClass="muted"/>
+                <Label fx:id="orderNumberlbl" styleClass="heading-2">
+                  <font><Font size="22"/></font>
+                </Label>
+              </VBox>
+
+              
+              <Separator/>
+
+              
+              <HBox spacing="10" alignment="CENTER">
+                <Button text="Home" onAction="#home" styleClass="primary"/>
+              </HBox>
+
+            </VBox>
+
+          </children>
+        </StackPane>
+      </center>
+
+    </BorderPane>
+  </children>
+</StackPane>

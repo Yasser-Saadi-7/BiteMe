@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<!--
+  OrderSummary.fxml — modern responsive layout
+  Controller: controllers.OrderSummaryController
+
+  Preserved IDs:
+    resNameLbl, mealTypeLbl, dishNameLbl, totalPriceLbl, qtxt, selectionsViewList
+  Preserved actions:
+    #home, #back, #addToCart
+-->
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.OrderSummaryController"
+           prefWidth="1000.0" prefHeight="640.0"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+  <stylesheets>
+    <URL value="@/css/OrderSummary.css"/>
+  </stylesheets>
+
+  <children>
+    <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+    <BorderPane maxWidth="1100">
+
+      <top>
+        <HBox spacing="8">
+          <padding><Insets top="20" right="24" bottom="12" left="24"/></padding>
+          <children>
+            <Label text="BiteMe" style="-fx-text-fill: white;">
+              <font><Font name="Segoe UI Semibold" size="20"/></font>
+            </Label>
+            <Label text="•  Order Summary" style="-fx-text-fill: rgba(255,255,255,0.85);">
+              <font><Font size="16"/></font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Home" onAction="#home"/>
+          </children>
+        </HBox>
+      </top>
+
+      <center>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+
+            <VBox spacing="18" styleClass="card" maxWidth="820" maxHeight="560">
+              <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+              <VBox spacing="4">
+                <Label text="Review your order" styleClass="heading-1"/>
+                <Label text="Confirm item details, quantity, and selections" styleClass="muted"/>
+              </VBox>
+
+              <GridPane hgap="16" vgap="12">
+                <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" minWidth="140"/>
+                  <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="Restaurant:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="muted"/>
+                <Label fx:id="resNameLbl" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Meal type:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="muted"/>
+                <Label fx:id="mealTypeLbl" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Dish:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="muted"/>
+                <Label fx:id="dishNameLbl" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="Quantity:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="muted"/>
+                <HBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <children>
+                    <TextField fx:id="qtxt" promptText="1" prefWidth="80"/>
+                    <Label text="pcs" styleClass="muted"/>
+                  </children>
+                </HBox>
+
+                <Label text="Base total:" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="muted"/>
+                <Label fx:id="totalPriceLbl" GridPane.columnIndex="1" GridPane.rowIndex="4" styleClass="heading-2"/>
+              </GridPane>
+
+             
+              <VBox spacing="8">
+                <Label text="Your selections" styleClass="muted"/>
+                <ListView fx:id="selectionsViewList"
+                          prefHeight="260.0"
+                          maxWidth="Infinity"
+                          VBox.vgrow="ALWAYS"/>
+              </VBox>
+
+              <HBox spacing="12" alignment="CENTER_RIGHT">
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Back" onAction="#back"/>
+                <Button text="Add To Cart" onAction="#addToCart" styleClass="primary"/>
+              </HBox>
+
+            </VBox>
+
+          </children>
+        </StackPane>
+      </center>
+
+    </BorderPane>
+  </children>
+</StackPane>

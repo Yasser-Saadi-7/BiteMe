@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<!--
+  ClientConnection.fxml
+  Redesigned UI for the BiteMe client connection screen.
+  - Controller: controllers.ClientConnectionController
+  - Preserves fx:id and onAction:
+      * TextField fx:id="ip_txt"
+      * Button   fx:id="connect_btn" onAction="#connect"
+  - Uses the shared stylesheet (ServerPort1.css) for a consistent look.
+  - Background image is optional; remove style if you prefer a flat background.
+-->
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.ClientConnectionController"
+           prefWidth="960.0" prefHeight="600.0"
+           stylesheets="@/css/LogIn.css"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+  <children>
+
+    <!-- Semi-transparent tint over the background to improve contrast -->
+    <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+    <!-- Top header + centered card -->
+    <BorderPane maxWidth="920">
+
+      <!-- Header: app name + page label -->
+      <top>
+        <HBox spacing="8">
+          <padding><Insets top="24" right="24" bottom="0" left="24"/></padding>
+          <children>
+            <Label text="BiteMe" style="-fx-text-fill: white;">
+              <font><Font name="Segoe UI Semibold" size="20"/></font>
+            </Label>
+            <Label text="•  Client Connection" style="-fx-text-fill: rgba(255,255,255,0.85);"/>
+          </children>
+        </HBox>
+      </top>
+
+      <!-- Centered connection card -->
+      <center>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+
+            <VBox styleClass="card" spacing="16" maxWidth="420">
+              <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+              <!-- Title & subtitle -->
+              <Label text="Client Connection" styleClass="heading-1"/>
+              <Label text="Enter the server IP address to connect" styleClass="muted"/>
+
+              <!-- Form grid -->
+              <GridPane hgap="10" vgap="12">
+                <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" minWidth="110"/>
+                  <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <children>
+                  <Label text="IP Address:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                  <TextField fx:id="ip_txt"
+                             promptText="e.g. 127.0.0.1"
+                             GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                </children>
+              </GridPane>
+
+              <!-- Actions -->
+              <HBox spacing="10">
+                <Button fx:id="connect_btn"
+                        text="Connect"
+                        onAction="#connect"
+                        styleClass="primary"/>
+              </HBox>
+
+              <!-- Optional helper text (no fx:id so it won't affect code) -->
+              <Label text="Use localhost (127.0.0.1) when testing on your machine" styleClass="muted"/>
+            </VBox>
+
+          </children>
+        </StackPane>
+      </center>
+    </BorderPane>
+  </children>
+</StackPane>

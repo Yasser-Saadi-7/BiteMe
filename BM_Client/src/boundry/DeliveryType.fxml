@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+
+<!--
+  DeliveryType.fxml — styled & centered layout
+  Controller: controllers.DeliveryTypeController
+
+  Preserved fx:id:
+    delivertTypeTable, deliveryTypeCol, priceCol
+  Preserved actions:
+    #back, #home, #next
+-->
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.DeliveryTypeController"
+           prefWidth="1000.0" prefHeight="640.0"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+  <stylesheets>
+    <URL value="@../css/LogIn.css"/>
+  </stylesheets>
+
+  <children>
+    <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+    <BorderPane maxWidth="1100">
+
+      <!-- Top bar -->
+      <top>
+        <HBox spacing="8">
+          <padding>
+            <Insets top="20" right="24" bottom="0" left="24"/>
+          </padding>
+          <children>
+            <Label text="BiteMe" style="-fx-text-fill: white;">
+              <font><Font name="Segoe UI Semibold" size="20"/></font>
+            </Label>
+            <Label text="•  Delivery Type" style="-fx-text-fill: rgba(255,255,255,0.85);"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Home" onAction="#home"/>
+          </children>
+        </HBox>
+      </top>
+
+      <!-- Center content -->
+      <center>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+
+            <VBox styleClass="card" spacing="18" maxWidth="800" maxHeight="500">
+              <padding>
+                <Insets top="22" right="22" bottom="22" left="22"/>
+              </padding>
+
+              <!-- Title -->
+              <VBox spacing="4" alignment="CENTER">
+                <Label text="Choose Delivery Type" styleClass="heading-1"/>
+                <Label text="Select how you'd like to receive your order, then continue."
+                       styleClass="muted"/>
+              </VBox>
+
+              <!-- Table in the center -->
+              <TableView fx:id="delivertTypeTable" prefHeight="320.0" prefWidth="760.0">
+                <columns>
+                  <TableColumn fx:id="deliveryTypeCol" text="Delivery Type" prefWidth="400.0"/>
+                  <TableColumn fx:id="priceCol"        text="Price"         prefWidth="200.0"/>
+                </columns>
+              </TableView>
+
+              <!-- Buttons -->
+              <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Back" onAction="#back"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Next" onAction="#next" styleClass="primary"/>
+              </HBox>
+
+            </VBox>
+
+          </children>
+        </StackPane>
+      </center>
+
+    </BorderPane>
+  </children>
+</StackPane>

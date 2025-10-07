@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+
+<!--
+  AddToMyCardMessage.fxml — modern, clean UI
+  Controller: controllers.AddToMyCardMessageController
+  Preserved logic & names:
+    onAction: #newOrder, #home, #myCart
+  No fx:id fields added/changed.
+-->
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.AddToMyCardMessageController"
+           prefWidth="960.0" prefHeight="600.0"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+  <!-- Stylesheet (relative to FXML in src/boundry/) -->
+  <stylesheets>
+    <URL value="@../css/LogIn.css"/>
+  </stylesheets>
+
+  <children>
+
+    <!-- Optional tint (nice if you later use a background image instead of gradient) -->
+    <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+    <!-- Center message card -->
+    <BorderPane maxWidth="560">
+      <center>
+        <VBox spacing="16" styleClass="card" BorderPane.alignment="CENTER">
+          <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+          <!-- Title -->
+          <VBox spacing="6">
+            <Label text="Added to cart" styleClass="heading-1"/>
+            <Label text="Your item has been added successfully." styleClass="muted"/>
+          </VBox>
+
+          <!-- Divider -->
+          <Separator/>
+
+          <!-- Helpful note -->
+          <Label wrapText="true"
+                 text="You can place a new order, go back home, or open your cart to review and checkout."/>
+
+          <!-- Actions: aligned to your controller method names -->
+          <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="New Order" onAction="#newOrder"/>
+            <Button text="Home" onAction="#home"/>
+            <Button text="My Cart" onAction="#myCart" styleClass="primary"/>
+          </HBox>
+
+        </VBox>
+      </center>
+    </BorderPane>
+
+  </children>
+</StackPane>

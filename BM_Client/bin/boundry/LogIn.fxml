@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.LogInController"
+           prefWidth="960.0" prefHeight="600.0"
+           stylesheets="@/css/LogIn.css"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+    <children>
+       
+        <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+        <BorderPane maxWidth="920">
+            <top>
+       
+                <HBox spacing="8">
+                    <padding>
+                        <Insets top="24" right="24" bottom="0" left="24"/>
+                    </padding>
+                    <children>
+                        <Label text="BiteMe" style="-fx-text-fill: white;">
+                            <font>
+                                <Font name="Segoe UI Semibold" size="20"/>
+                            </font>
+                        </Label>
+                        <Label text="•  Login" style="-fx-text-fill: rgba(255,255,255,0.85);"/>
+                    </children>
+                </HBox>
+            </top>
+
+            <center>
+                
+                <StackPane BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox styleClass="card" spacing="16" maxWidth="420">
+                            <padding>
+                                <Insets top="22" right="22" bottom="22" left="22"/>
+                            </padding>
+                            <children>
+                                <Label text="Welcome back" styleClass="heading-1"/>
+                                <Label text="Sign in to continue" styleClass="muted"/>
+
+                                <GridPane hgap="10" vgap="12">
+                                    <columnConstraints>
+                                        <ColumnConstraints halignment="RIGHT" minWidth="100"/>
+                                        <ColumnConstraints hgrow="ALWAYS"/>
+                                    </columnConstraints>
+
+                                    <children>
+                                        <Label text="User Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                                        <TextField fx:id="txtusername"
+                                                   promptText="e.g. yasser@biteme"
+                                                   GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                                        <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                                        
+                                        <PasswordField fx:id="txtpassword"
+                                                   promptText="••••••••"
+                                                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                    </children>
+                                </GridPane>
+
+                                <HBox spacing="10">
+                                    <Button fx:id="btnlogIn" text="Log In" onAction="#logIn" styleClass="primary"/>
+                                    <Button fx:id="btnclose" text="Close"  onAction="#closePage" styleClass="danger"/>
+                                </HBox>
+
+                                <Label fx:id="txtmessage" text="Enter User name and Password" styleClass="muted"/>
+                            </children>
+                        </VBox>
+                    </children>
+                </StackPane>
+            </center>
+        </BorderPane>
+    </children>
+</StackPane>

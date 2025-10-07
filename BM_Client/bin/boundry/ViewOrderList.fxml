@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+
+<!--
+  ViewOrderList.fxml — styled like ClientPage.fxml
+  Controller: controllers.ViewOrderListController
+
+  Preserved fx:id:
+    orderListTable, orderLishNumCol, resCol, timeCol, arrivalCol,
+    statusCol, approvalCol, addressCol, deliveryCol, priceCol
+
+  Preserved actions:
+    #home, #acceptOrder
+-->
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controllers.ViewOrderListController"
+           prefWidth="1000.0" prefHeight="640.0"
+           style="-fx-background-image: url('/images/LogIn.png');
+                  -fx-background-size: cover;
+                  -fx-background-position: center;">
+
+  <stylesheets>
+    <URL value="@../css/LogIn.css"/>
+  </stylesheets>
+  <children>
+    <!-- Subtle overlay for contrast above the image -->
+    <Pane StackPane.alignment="CENTER" styleClass="overlay-tint"/>
+
+    <BorderPane maxWidth="1100">
+
+      <!-- Header: app name + page title + Home -->
+      <top>
+        <HBox spacing="8">
+          <padding><Insets top="20" right="24" bottom="0" left="24"/></padding>
+          <children>
+            <Label text="BiteMe" style="-fx-text-fill: white;">
+              <font><Font name="Segoe UI Semibold" size="20"/></font>
+            </Label>
+            <Label text="•  Orders" style="-fx-text-fill: rgba(255,255,255,0.85);"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Home" onAction="#home"/>
+          </children>
+        </HBox>
+      </top>
+
+      <!-- Center content card (table + actions) -->
+      <center>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+
+            <VBox styleClass="card" spacing="18" maxWidth="980" maxHeight="560">
+              <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+              <!-- Title & hint -->
+              <VBox spacing="4">
+                <Label text="Order List" styleClass="heading-1"/>
+                <Label text="Review your orders and accept those that are ready." styleClass="muted"/>
+              </VBox>
+
+              <!-- Orders table (IDs preserved) -->
+              <TableView fx:id="orderListTable" prefHeight="420.0">
+                <columns>
+                  <TableColumn fx:id="orderLishNumCol" text="Order #"      prefWidth="110.0"/>
+                  <TableColumn fx:id="resCol"          text="Restaurant"   prefWidth="140.0"/>
+                  <TableColumn fx:id="timeCol"         text="Time"         prefWidth="100.0"/>
+                  <TableColumn fx:id="arrivalCol"      text="Arrival Time" prefWidth="120.0"/>
+                  <TableColumn fx:id="statusCol"       text="Status"       prefWidth="110.0"/>
+                  <TableColumn fx:id="approvalCol"     text="Approval"     prefWidth="110.0"/>
+                  <TableColumn fx:id="addressCol"      text="Address"      prefWidth="160.0"/>
+                  <TableColumn fx:id="deliveryCol"     text="Delivery"     prefWidth="120.0"/>
+                  <TableColumn fx:id="priceCol"        text="Price"        prefWidth="110.0"/>
+                </columns>
+              </TableView>
+
+              <!-- Bottom actions -->
+              <HBox spacing="12" alignment="CENTER_RIGHT">
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Accept Order" onAction="#acceptOrder" styleClass="primary"/>
+              </HBox>
+
+            </VBox>
+
+          </children>
+        </StackPane>
+      </center>
+
+    </BorderPane>
+  </children>
+</StackPane>
