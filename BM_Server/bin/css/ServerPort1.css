@@ -1,0 +1,101 @@
+/* ===== Brand tuned to the teal/blue background ===== */
+.root {
+    -fx-font-family: "Segoe UI", "Inter", "Rubik", "Noto Sans", system-ui, sans-serif;
+    -fx-font-size: 14px;
+
+    /* צבעי מותג תואמי הרקע */
+    -bm-bg:            #0f172a;   /* בסיס כהה-כחלחל */
+    -bm-surface:       rgba(255,255,255,0.94); /* כרטיס לבן-זכוכיתי */
+    -bm-surface-2:     #eef2f7;
+    -bm-text:          #0b1221;
+    -bm-muted:         #5b6474;
+
+    -bm-primary:       #14b8a6;   /* TEAL */
+    -bm-primary-600:   #0d9488;
+    -bm-primary-50:    #e6fffb;
+
+    -bm-danger:        #ef4444;
+
+    -bm-radius:        12px;
+    -bm-radius-lg:     16px;
+
+    -fx-focus-color:   -bm-primary;
+    -fx-faint-focus-color: rgba(20,184,166,0.22);
+}
+
+/* רקע ברירת מחדל חלק (כשאין תמונה) */
+.anchor-pane, .stack-pane, .border-pane, .vbox, .hbox, .grid-pane {
+    -fx-background-color: linear-gradient(to bottom, #0b1221, #0f172a);
+}
+
+/* ===== כותרות ===== */
+.label.heading-1 { -fx-font-size: 22px; -fx-font-weight: 800; -fx-text-fill: -bm-text; }
+.label.heading-2 { -fx-font-size: 18px; -fx-font-weight: 700; -fx-text-fill: -bm-text; }
+.label.muted     { -fx-text-fill: -bm-muted; }
+
+/* ===== Card (זכוכיתי עדין) ===== */
+.card {
+    -fx-background-color: -bm-surface;
+    -fx-background-radius: -bm-radius-lg;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 20, 0.3, 0, 6);
+    -fx-padding: 18;
+}
+
+/* ===== Buttons (teal primary) ===== */
+.button {
+    -fx-background-radius: 999px;
+    -fx-padding: 10 16;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+    -fx-background-color: #e5e7eb;
+    -fx-text-fill: -bm-text;
+    -fx-border-color: transparent;
+}
+.button:hover   { -fx-background-color: #dfe3ea; }
+.button:pressed { -fx-translate-y: 1; }
+.button:disabled{ -fx-opacity: 0.6; }
+
+.button.primary { -fx-background-color: -bm-primary; -fx-text-fill: white; }
+.button.primary:hover { -fx-background-color: -bm-primary-600; }
+.button.danger  { -fx-background-color: -bm-danger;  -fx-text-fill: white; }
+
+/* ===== Inputs ===== */
+.text-field, .password-field, .text-area, .combo-box-base, .date-picker {
+    -fx-background-radius: 10px;
+    -fx-background-color: white;
+    -fx-border-color: #dfe3ea;
+    -fx-border-radius: 10px;
+    -fx-padding: 10 12;
+    -fx-text-fill: -bm-text;
+}
+.text-field:focused, .password-field:focused, .text-area:focused,
+.combo-box-base:focused, .date-picker:focused {
+    -fx-border-color: -bm-primary;
+    -fx-effect: dropshadow(gaussian, rgba(20,184,166,0.28), 12, 0.25, 0, 3);
+}
+.text-input:empty:showing { -fx-prompt-text-fill: rgba(11,18,33,0.45); }
+
+/* ===== TableView מתכתב עם הרקע ===== */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-table-cell-border-color: transparent;
+}
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, rgba(20,184,166,0.16), rgba(14,165,233,0.08));
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-padding: 8 6;
+}
+.table-view .column-header .label {
+    -fx-font-weight: 700;
+    -fx-text-fill: #0f172a;
+}
+.table-view .table-row-cell { -fx-background-color: rgba(255,255,255,0.55); }
+.table-view .table-row-cell:odd { -fx-background-color: rgba(255,255,255,0.6); }
+.table-view .table-row-cell:selected { -fx-background-color: -bm-primary-50; }
+.table-view .table-row-cell:hover { -fx-background-color: rgba(255,255,255,0.7); }
+.table-view .table-cell { -fx-padding: 10 12; -fx-text-fill: -bm-text; }
+
+/* ===== שכבת טינט לרקע (לקריאות) ===== */
+.overlay-tint { -fx-background-color: rgba(2, 6, 23, 0.38); }  /* כחול-כהה שקוף */
