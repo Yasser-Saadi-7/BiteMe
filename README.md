@@ -26,7 +26,17 @@ It allows complete management of business operations, from receiving a customer'
 - Monthly Report Generation: Access to detailed, view-ready reports for their branch:  
   - **Income Report:** Financial analysis of revenues.  
   - **Order Report:** Breakdown of orders by item type.  
-  - **Performance Report:** Graphical analysis of adherence to delivery times.  
+  - **Performance Report:** Graphical analysis of adherence to delivery times.
+ 
+### 💼 For the Business Client (Sponsor)
+- Corporate Management Portal: The system provides a dedicated interface for business clients (Sponsors) with special permissions to manage and control their 
+  organization's food orders.
+- Order Tracking and Management: The Sponsor has access to two key tools: 
+  - **View Order History:** The ability to view all orders placed under the business account.  
+  - **Update Order Status:** The ability to access the order management screen (Update Status) to approve new employee orders or update their status, providing 
+     full operational control over the corporate ordering process.
+
+ 
 
 ---
 
