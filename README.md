@@ -1,51 +1,53 @@
 # BiteMe
 A client-server food ordering application with a MySQL database, featuring a role-based interface for customers, restaurants, and managers.
 
-🍔 BiteMe Project
-BiteMe is a distributed, full-stack restaurant management and food ordering system developed in the Java environment. The system was built as a academic project, demonstrating an advanced client-server architecture, database management, and a dynamic, role-based user interface. The system allows for the complete management of business operations, from receiving a customer's order, through operational processing at the restaurant, to the generation of complex analytical reports for management.
+---
+
+## 🍔 BiteMe Project
+BiteMe is a distributed, full-stack restaurant management and food ordering system developed in the Java environment.  
+The system was built as an academic project, demonstrating an advanced client-server architecture, database management, and a dynamic, role-based user interface.  
+It allows complete management of business operations, from receiving a customer's order, through processing at the restaurant, to generating complex analytical reports for management.
 
 ---
 
-🎯 Implemented Features
-The system provides a tailored user experience for each of its user types, with an emphasis on the following fully developed functionalities:
+## 🎯 Implemented Features
 
-👤 For the Customer  
+### 👤 For the Customer
 - Guided Ordering Wizard: A step-by-step interface for selecting a restaurant, meal type, dishes, and customizing each dish.  
 - Flexible Delivery Options: Full support for standard delivery or self-pickup (Take Away).  
 - Order Tracking: View order history and the updated status of each order.  
 
-🍴 For the Restaurant (Qualified Worker)  
-- Real-Time Order Management: An operational interface to view incoming orders and update their status (Approved, Ready, Shipped).  
-- Full Menu Management: The ability to add, delete, and update the prices of dishes on the restaurant's menu.  
+### 🍴 For the Restaurant (Qualified Worker)
+- Real-Time Order Management: Operational interface to view incoming orders and update their status (Approved, Ready, Shipped).  
+- Full Menu Management: Ability to add, delete, and update the prices of dishes on the restaurant's menu.  
 
-👔 For the Branch Manager  
-- Account Creation: An interface for registering new customers in the system.  
+### 👔 For the Branch Manager
+- Account Creation: An interface for registering new customers.  
 - Monthly Report Generation: Access to detailed, view-ready reports for their branch:  
-  - Income Report: Financial analysis of restaurant revenues in the branch.  
-  - Order Report: Breakdown of orders by item type.  
-  - Performance Report: Graphical analysis of adherence to delivery times.  
+  - **Income Report:** Financial analysis of revenues.  
+  - **Order Report:** Breakdown of orders by item type.  
+  - **Performance Report:** Graphical analysis of adherence to delivery times.  
 
 ---
 
-🏗️ System Architecture  
-The system is built on a Three-Tier Client-Server architecture, which clearly separates presentation, logic, and data.
+## 🏗️ System Architecture
 
-🖥️ Server-Side:  
-- **Communication Core (EchoServer.java):** Based on the OCSF library, this component listens for connections and manages communication with multiple clients simultaneously. The central `handleMessageFromClient` method acts as a router, receiving every request from the client, identifying its type via `MessageType`, and triggering the appropriate logic.  
-- **Data Access Layer (mysqlConnection.java):** Centralizes all communication with the MySQL database. Responsible for creating the connection, executing queries (SELECT, UPDATE, INSERT), and mapping results to system objects.  
-- **Operational Interface (ServerUI.java):** Simple JavaFX interface for entering DB connection details and starting the server.  
+### 🖥️ Server-Side
+- **Communication Core (EchoServer.java):** Based on OCSF library, listens for connections and manages communication with multiple clients simultaneously. The central `handleMessageFromClient` method routes requests based on `MessageType`.  
+- **Data Access Layer (mysqlConnection.java):** Manages all communication with the MySQL database. Executes queries and maps results to objects.  
+- **Operational Interface (ServerUI.java):** JavaFX-based GUI for DB connection setup and server management.  
 
-🖼️ Client-Side:  
-- **Communication Core (ChatClient.java):** Manages connection to the server. Responsible for sending requests and receiving responses. The central `handleMessageFromServer` updates global data in the app.  
+### 🖼️ Client-Side
+- **Communication Core (ChatClient.java):** Manages connection to the server, sends requests, and processes responses.  
 - **MVC Architecture:**  
-  - *View:* FXML files define the screens.  
-  - *Controller:* Java classes handle UI logic and communication with server.  
-  - *Model:* Objects representing entities like Order, Dish, User.  
-- **Role-Based Interface:** After login, each user is routed to their home screen based on their role.  
+  - *View:* FXML files define screen layouts.  
+  - *Controller:* Java classes (e.g., `LogInController`) handle UI logic and communication.  
+  - *Model:* Entity objects like `Order`, `Dish`, `User`.  
+- **Role-Based Interface:** After login, users are routed to their home screen according to their role.  
 
 ---
 
-🛠️ Technologies Used  
+## 🛠️ Technologies Used
 - **Language:** Java  
 - **User Interface:** JavaFX  
 - **Client-Server Communication:** OCSF (Object Client-Server Framework)  
@@ -53,37 +55,36 @@ The system is built on a Three-Tier Client-Server architecture, which clearly se
 
 ---
 
-🚀 Getting Started (Installation & Usage)  
+## 🚀 Getting Started
 
-### Step 0: Prerequisites  
+### Step 0: Prerequisites
 - Java Development Kit (JDK) 8+  
-- MySQL Server (WAMP/XAMPP/direct install)  
+- MySQL Server (WAMP, XAMPP, or standalone install)  
 
-### Step 1: Database Setup  
+### Step 1: Database Setup
 1. Start MySQL server.  
-2. Connect with MySQL Workbench or phpMyAdmin.  
+2. Connect using MySQL Workbench.  
 3. Create schema:  
    ```sql
-   CREATE SCHEMA biteme;
+   CREATE SCHEMA project;
    ```  
-4. Import `BiteMe.sql` into the schema to create tables and load data.  
+4. Import `project.sql` to create tables and load sample data.  
 
-### Step 2: Running the Server  
+### Step 2: Running the Server
 1. Locate `ServerBiteMe.jar` and run it.  
-2. Fill in:  
-   - DB Name: `biteme`  
+2. Fill in:    
    - DB User: your MySQL username (e.g., root)  
    - DB Password: your password  
    - Port: e.g., 5555  
-3. Click **Connect** → server will start listening.  
+3. Click **Connect** to start server.  
 
-### Step 3: Running the Client  
+### Step 3: Running the Client
 1. Locate `ClientBiteMe.jar` and run it.  
 2. Fill in:  
    - IP: `localhost` (if server is on same machine)  
    - Port: e.g., 5555  
 3. Click **Connect**.  
-4. Login with existing DB users and start using the system.  
+4. Log in with an existing DB user and start using the system.  
 
 ---
 
